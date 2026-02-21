@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 4.1"
+gem "bigdecimal"
 gem "webrick"
 gem "kramdown-parser-gfm"
 gem "jekyll-sass-converter", "~> 2.0"
