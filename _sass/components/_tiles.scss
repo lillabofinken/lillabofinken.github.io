@@ -67,12 +67,13 @@
 			}
 
 			&:before {
+				@include vendor('transition', 'opacity 0.15s ease');
 				bottom: 0;
 				content: '';
 				display: block;
 				height: 100%;
 				left: 0;
-				opacity: 1.0;
+				opacity: 0.0;
 				position: absolute;
 				width: 100%;
 				z-index: 2;
