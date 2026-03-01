@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Generic
-description: Lorem ipsum dolor est
-image: assets/images/pic05.jpg
+title: Generic2
+description: NewPage
+image: assets/images/pic09.jpg
 nav-menu: true
 ---
 
