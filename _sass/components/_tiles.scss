@@ -19,10 +19,7 @@
 			@include vendor('align-items', 'center');
 			@include vendor('display', 'flex');
 			@include vendor('transition', (
-				'transform 0.25s ease',
-				'opacity 0.25s ease',
-				'filter 1s ease',
-				'-webkit-filter 1s ease'
+				'transform 0.15s ease'
 			));
 			@include padding(4em, 4em);
 			background-position: center;
@@ -70,20 +67,19 @@
 			}
 
 			&:before {
-				@include vendor('transition', 'opacity 0.5s ease');
 				bottom: 0;
 				content: '';
 				display: block;
 				height: 100%;
 				left: 0;
-				opacity: 0.85;
+				opacity: 1.0;
 				position: absolute;
 				width: 100%;
 				z-index: 2;
 			}
 
 			&:after {
-				background-color: transparentize(_palette(bg), 0.75);
+				background-color: transparentize(_palette(bg), 1.0);
 				content: '';
 				display: block;
 				height: 100%;
@@ -96,14 +92,13 @@
 
 			&:hover {
 				&:before {
-					opacity: 0;
+					opacity: 1;
 				}
 			}
 
 			&.is-transitioning {
-				@include vendor('transform', 'scale(0.95)');
-				@include vendor('filter', 'blur(0.5em)');
-				opacity: 0;
+				@include vendor('transform', 'scale(0.85)');
+				opacity: 1;
 			}
 
 			&:nth-child(4n - 1),

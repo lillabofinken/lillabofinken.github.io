@@ -188,7 +188,7 @@
 									else
 										location.href = href;
 
-								}, 500);
+								}, 0);
 
 						});
 
