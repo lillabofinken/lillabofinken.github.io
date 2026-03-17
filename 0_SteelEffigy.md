@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Generic2
+title: Steel Effigy
 description: NewPage
-image: assets/images/pic09.jpg
+image: assets/images/SteelEffigyMenuPic.png
 nav-menu: true
 ---
 
