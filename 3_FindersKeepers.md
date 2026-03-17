@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Elements
-image: assets/images/pic07.jpg
+title: Finders Keepers
+image: assets/images/FindersKeepers.png
 nav-menu: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Steel Effigy
+title:
 description: NewPage
 image: assets/images/SteelEffigyMenuPic.png
 nav-menu: true

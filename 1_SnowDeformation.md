@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Generic3
-description: Lorem ipsum dolor est
-image: assets/images/pic05.jpg
+title: Snow Deformation
+description: Collision done with a compute shader
+image: assets/images/SnowDeformationRamp.png
 nav-menu: true
 ---
 

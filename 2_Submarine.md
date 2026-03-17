@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Generic
-description: Lorem ipsum dolor est
-image: assets/images/OldSnow.png
+title: Imaging Sonar
+description: Made with a scene capture component and a compute shader
+image: assets/images/Sonar.png
 nav-menu: true
 ---
 
