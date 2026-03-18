@@ -55,16 +55,22 @@
 			.tile-owner-logo 
 			{
     			position: absolute;
-    			bottom: 1em;
+    			top: 1em;
     			right: 1em;
-    			width: 150px;
+    			width: 200px;
     			height: auto;
     			z-index: 5; // above overlays
 
     			background: rgba(255,255,255,0.0);
     			padding: 4px;
     			border-radius: 4px;
+				pointer-events: none;
  		 	}
+			&:nth-child(-n + 3) .tile-owner-logo
+			{
+  				top: auto;
+  				bottom: 1em;
+			}
 
 
 			.image {
