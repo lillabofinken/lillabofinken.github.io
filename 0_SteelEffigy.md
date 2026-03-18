@@ -1,8 +1,9 @@
 ---
 layout: post
-title:
-description: NewPage
-image: assets/images/SteelEffigyMenuPic.png
+title: Steel Effigy
+description: Gameplay Programmer Intern
+image: assets/images/SteelEffigy.png
+owner: assets/images/CampGroundLogo.png
 nav-menu: true
 ---
 

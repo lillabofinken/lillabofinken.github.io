@@ -3,6 +3,7 @@ layout: post
 title: Imaging Sonar
 description: Made with a scene capture component and a compute shader
 image: assets/images/Sonar.png
+owner: assets/images/TGA.png
 nav-menu: true
 ---
 

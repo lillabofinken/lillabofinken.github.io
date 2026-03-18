@@ -3,6 +3,7 @@ layout: post
 title: Snow Deformation
 description: Collision done with a compute shader
 image: assets/images/SnowDeformationRamp.png
+owner: assets/images/TGA.png
 nav-menu: true
 ---
 

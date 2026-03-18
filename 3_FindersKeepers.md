@@ -1,7 +1,9 @@
 ---
 layout: page
 title: Finders Keepers
+description: Pseudoregalia inspiered game project
 image: assets/images/FindersKeepers.png
+owner: assets/images/TGA.png
 nav-menu: true
 ---
 

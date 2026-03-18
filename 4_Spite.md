@@ -3,6 +3,7 @@ title: Spite
 layout: landing
 description: 'Lorem ipsum dolor sit amet nullam consequa<br />sed veroeros. tempus adipiscing nulla.'
 image: assets/images/Spite.png
+owner: assets/images/TGA.png
 nav-menu: true
 ---
 
