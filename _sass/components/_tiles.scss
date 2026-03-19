@@ -17,12 +17,12 @@
 
 		
 		article {
-			@include vendor('align-items', 'center');
+			@include vendor('align-items', 'top');
 			@include vendor('display', 'flex');
 			@include vendor('transition', (
 				'transform 0.15s ease'
 			));
-			@include padding(4em, 4em);
+			@include padding(1em, 1em);
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
