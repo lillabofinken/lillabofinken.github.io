@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Finders Keepers
-description: Pseudoregalia inspiered game project
+title: TGA Projects
+description: Two games made in a custom engine with a group of 20 people
 image: assets/images/FindersKeepers.png
 owner: assets/images/TGA.png
 nav-menu: true
