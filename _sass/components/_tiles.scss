@@ -38,18 +38,10 @@
 			0 0px 2px  rgba(0,0,0,1.0),
 			0 0px 3px  rgba(0,0,0,1.0),
 			0 0px 4px  rgba(0,0,0,1.0),
-			0 0px 5px  rgba(0,0,0,1.0),
-			0 0px 10px rgba(0,0,0,1.0),
-			0 0px 15px rgba(0,0,0,1.0),
-			0 0px 20px rgba(0,0,0,1.0),
-			0 0px 25px rgba(0,0,0,1.0),
-			0 0px 30px rgba(0,0,0,1.0),
-			0 0px 35px rgba(0,0,0,1.0),
-			0 0px 40px rgba(0,0,0,1.0),
-			0 0px 45px rgba(0,0,0,1.0);
+			0 0px 5px  rgba(0,0,0,1.0);
 			flex: 1 auto;
 			&:nth-child(-n + 3) {
-				width: 33.3333%;
+				width: 50.0%;
 			}
 
 			.tile-owner-logo 
@@ -66,7 +58,7 @@
     			border-radius: 4px;
 				pointer-events: none;
  		 	}
-			&:nth-child(-n + 3) .tile-owner-logo
+			&:nth-child(-n + 2) .tile-owner-logo
 			{
   				top: auto;
   				bottom: 1em;
