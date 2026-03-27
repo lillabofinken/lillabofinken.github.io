@@ -18,11 +18,26 @@ My main insperations for using Parallax Occlution Mapping for snow deformation w
 <p> <a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspiered me to make sure that my snow was not limited to flat ground </p>
 
-I have two objects that I call snow corneres that I place in the level to decide the area of deformable snow. I use the corner positions later to turn world space positions in to a 0-1 uv position.
+I have 2 objects, Snow Corners, that are used to define the area for deformable snow. 
 
-I have a deformation manager that keeps track of all objects that can interact with the snow. I send the matrecies of these objects to a compute shader but before, I replace the vertical position with the hit distance of a linetrace gowing down from the object to the ground so I know the relative verticle position from the snow to the object. I have collision layers so the line trace can only hit objects marked as Deformable.
+I have a deformation manager that keeps track of all objects that can deform the snow.
+It sends the Snow corner positions, max snow depth and the matrices of the object but replaces the vertical position with the vertical distance the object is from deformable ground.
 
-I have a render target that I use ads a heightmap for the snow that starts filled with red subtracted by some noise to make it look more intresting when undisturbed. In the compute shader I use the object matrecies and the heightmap to calculate the intersection and lower the heightmap with the intersection, casuing the deformation. The objects are calulated as spheres with that scale with their matrix.
+I have a render texture used as a heightmap for the snow that on startup has its red channel filled with noise between 0.8-1.0  to make undisturbed snow more interesting.
 
-With the deformation I also draw a green circle as well for the pileup that's a bit bigger than the deformation area.
+In the compute shader update the heightmap by checking if any of the tracked objects is intersecting with the snow and lower the heightmap value accordingly. In the green channel I paint a larger area around it that will be used for the pileup on the edges of the tracks.
+
+Now for the material
+
+
+I start by raising the vertices by the max snow height.
+I use my own modified version of Unreal’s Parallax Occlusion Mapping ( POM ) node and I use pixel depth offset to get a much more convincing 3D effect by revealing things below the snow as seen on the planks.
+
+In the custom POM node I have an input for a detail texture and I use the blue channel to add some small tiling detail and I use the same texture to break up the color a bit.
+
+I take the green channel, multiply it by the red channel and a strength to only keep the edges and control the height. I add the result and lower the red channel so that combined it’s still within a 0-1 range. In the picture it’s an even split at 0.5 pileup strength.
+
+In the custom POM function I use the green channel as a mask for the green channel of the detail texture.
+
+Same for the red channels.
 
