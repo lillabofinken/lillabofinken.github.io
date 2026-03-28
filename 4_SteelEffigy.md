@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Steel Effigy
-description: Gameplay Programmer Intern
+description:
 image: assets/images/SteelEffigy.png
 owner: assets/images/CampGroundLogo.png
 nav-menu: true
