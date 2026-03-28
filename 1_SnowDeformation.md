@@ -18,26 +18,57 @@ My main insperations for using Parallax Occlution Mapping for snow deformation w
 <p> <a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspiered me to make sure that my snow was not limited to flat ground </p>
 
-I have 2 objects, Snow Corners, that are used to define the area for deformable snow. 
+<b>I have 2 objects, Snow Corners, that are used to define the area for deformable snow. </b>
+<img src="/assets/images/SnowCorners.png" alt="Description">
 
-I have a deformation manager that keeps track of all objects that can deform the snow.
-It sends the Snow corner positions, max snow depth and the matrices of the object but replaces the vertical position with the vertical distance the object is from deformable ground.
+<b>I have a deformation manager that keeps track of all objects that can deform the snow.<br>
+It sends the Snow corner positions, max snow depth and the matrices of the object. <br>
+The manager replaces the vertical position in the matrecies with how high the object is from deformable ground which I get from a line trace.</b>
+<img src="/assets/images/FootExample.png" alt="Description">
 
-I have a render texture used as a heightmap for the snow that on startup has its red channel filled with noise between 0.8-1.0  to make undisturbed snow more interesting.
+<b>I have a render texture used as a heightmap for the snow that on startup has its red channel filled with noise between 0.8-1.0  to make undisturbed snow more interesting.</b>
 
-In the compute shader update the heightmap by checking if any of the tracked objects is intersecting with the snow and lower the heightmap value accordingly. In the green channel I paint a larger area around it that will be used for the pileup on the edges of the tracks.
+<b>In the compute shader I use the matrices positions and scales to calculate sphere intersections with the snow and lower the heightmap value accordingly. In the green channel I paint a larger area around it that will be used for the pileup on the edges of the tracks.</b>
 
-Now for the material
+<h3>Now for the material</h3>
 
 
-I start by raising the vertices by the max snow height.
-I use my own modified version of Unreal’s Parallax Occlusion Mapping ( POM ) node and I use pixel depth offset to get a much more convincing 3D effect by revealing things below the snow as seen on the planks.
+<div style="margin:0; padding:0;">
+  <b style="margin:0; padding:0; display:block;">
+    I start by raising the vertices by the max snow height.
+  </b>
 
-In the custom POM node I have an input for a detail texture and I use the blue channel to add some small tiling detail and I use the same texture to break up the color a bit.
+  <div class="row 50%" style="margin-top:0;">
+    <div class="6u 12u$(small)">
+      <span class="image fit">
+        <img src="{% link assets/images/Snow0_Original.png %}" alt="Image 1" />
+      </span>
+    </div>
+    <div class="6u$ 12u$(small)">
+      <span class="image fit">
+        <img src="{% link assets/images/Snow1_WPO.png %}" alt="Image 2" />
+      </span>
+    </div>
+  </div>
+</div>
 
-I take the green channel, multiply it by the red channel and a strength to only keep the edges and control the height. I add the result and lower the red channel so that combined it’s still within a 0-1 range. In the picture it’s an even split at 0.5 pileup strength.
 
-In the custom POM function I use the green channel as a mask for the green channel of the detail texture.
+<b>I use my own modified version of Unreal’s Parallax Occlusion Mapping ( POM ) node.<br>
+I use pixel depth offset to get a much more convincing 3D effect by revealing things below the snow.</b>
+<img src="/assets/images/Snow3_POM.png" alt="Description">
 
-Same for the red channels.
+<b>In the custom POM node I have an input for a detail texture and I use the blue channel to add some small tiling detail and I use the same texture to break up the color a bit.</b>
+<img src="/assets/images/Snow5_DetailNoiseColor.png" alt="Description">
 
+
+
+<b>I take the green channel, multiply it by the red channel and a strength to only keep the edges and control the height. <br> 
+I add the result and lower the red channel so that combined it’s still within a 0-1 range.<br> 
+In the picture it’s an even split at 0.5 pileup strength.</b>
+<img src="/assets/images/Snow6_Pileup.png" alt="Description">
+
+<b>In the custom POM function I use the green channel as a mask for the green channel of the detail texture.</b>
+<img src="/assets/images/Snow7_PileuptDetail.png" alt="Description">
+
+<b>Same for the red channels.</b>
+<img src="/assets/images/Snow8_DeformationDetail.png" alt="Description">
