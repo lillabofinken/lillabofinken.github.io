@@ -13,9 +13,9 @@ nav-menu: true
 <p> For the landscape I used heightmaps from <a href="https://www.fab.com/listings/11388bc3-c13a-4c2f-b7d0-578022969a60
 "> StampIT! Collection - FREE Examples by Rowlan </a> </p>
 
-My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018
 
-<p> <a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
+
+<p> My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspiered me to make sure that my snow was not limited to flat ground </p>
 
 <b>I have 2 objects, Snow Corners, that are used to define the area for deformable snow. </b>
@@ -29,6 +29,8 @@ The manager replaces the vertical position in the matrecies with how high the ob
 <b>I have a render texture used as a heightmap for the snow that on startup has its red channel filled with noise between 0.8-1.0  to make undisturbed snow more interesting.</b>
 
 <b>In the compute shader I use the matrices positions and scales to calculate sphere intersections with the snow and lower the heightmap value accordingly. In the green channel I paint a larger area around it that will be used for the pileup on the edges of the tracks.</b>
+<img src="/assets/images/Heightmap.png" alt="Description">
+
 
 <h3>Now for the material</h3>
 
@@ -72,3 +74,6 @@ In the picture it’s an even split at 0.5 pileup strength.</b>
 
 <b>Same for the red channels.</b>
 <img src="/assets/images/Snow8_DeformationDetail.png" alt="Description">
+
+<b>Detail Texture I created in Substance designer for this project.<br></b>
+<img src="/assets/images/DetailTexture.png" alt="Description">
