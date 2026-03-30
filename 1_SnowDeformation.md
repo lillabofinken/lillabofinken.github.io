@@ -16,14 +16,14 @@ For the landscape I used heightmaps from <a href="https://www.fab.com/listings/1
 
 
 <p> My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
-">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspiered me to make sure that my snow was not limited to flat ground </p>
+">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspired me to make sure that my snow was not limited to flat ground </p>
 
 <b>I have 2 objects, Snow Corners, that are used to define the area for deformable snow. </b>
 <img src="/assets/images/SnowCorners.png" alt="Description">
 
 <b>I have a deformation manager that keeps track of all objects that can deform the snow.<br>
 It sends the Snow corner positions, max snow depth and the matrices of the object. <br>
-The manager replaces the vertical position in the matrecies with how high the object is from deformable ground which I get from a line trace.</b>
+The manager replaces the vertical position in the matrices with how high the object is from deformable ground which I get from a line trace.</b>
 <img src="/assets/images/FootExample.png" alt="Description">
 
 <b>I have a render texture used as a heightmap for the snow that on startup has its red channel filled with noise between 0.8-1.0  to make undisturbed snow more interesting.</b>
