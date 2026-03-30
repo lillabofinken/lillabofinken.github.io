@@ -150,8 +150,7 @@ nav-menu: true
   <h4>Passive Sonar</h4>
   <img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" />
 </div>
-<div></div>
-The passive sonar is quite simple. It's a waterfall graff, vertical being time, new information being on top, old at the bottom and horizontal being angle. <br>
+<div>The passive sonar is quite simple. It's a waterfall graff, vertical being time, new information being on top, old at the bottom and horizontal being angle. <br>
 It's done in a compute shader that constantly scrolls the texture down and updates the top row of pixels.<br>
 On the top row I first add just an ambient noise that's supposed to be the ambient noise of the sea.<br>
-Secondly I send an array of positions of noise emitting objects that I use to add lines of noise to the top row. The strenght and thickness being dependent on distance from the player. The position being dependent on angle from the players forward direction. ( 90° left = U0 ) ( 0° = U0.5 ) ( 90° right = U1 ) 
+Secondly I send an array of positions of noise emitting objects that I use to add lines of noise to the top row. The strenght and thickness being dependent on distance from the player. The position being dependent on angle from the players forward direction. ( 90° left = U0 ) ( 0° = U0.5 ) ( 90° right = U1 ) </div>
