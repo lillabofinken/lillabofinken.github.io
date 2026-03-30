@@ -64,3 +64,37 @@ img {
 			}
 		}
 	}
+
+	/* Custom Grid for 50/50 split images and text */
+.split-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+
+    .column {
+        flex: 1;
+        min-width: 50%;
+        box-sizing: border-box;
+        
+        // Horizontal Gutter
+        &:first-child { padding-right: 10px; }
+        &:last-child { padding-left: 10px; }
+
+        // Override theme's default image margins
+        .image.fit {
+            margin: 0 !important; 
+        }
+
+        // Ensure text doesn't have its own bottom margin
+        b, p {
+            display: block;
+            margin-bottom: 0;
+        }
+    }
+
+    // Use this class on the top row to create the gap above the text
+    &.bottom-gap {
+        margin-bottom: 50px;
+    }
+}

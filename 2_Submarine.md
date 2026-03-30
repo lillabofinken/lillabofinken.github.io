@@ -53,73 +53,64 @@ nav-menu: true
 
 
 
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <b> Each frame I use the slice to update a panorama. I find the correct pixels to update by using the camera's rotation and the horizontal fov</b>
-  </div>
-  <div class="6u$ 12u$(small)">
-    <b> Each frame I use the slice to update a panorama. I find the correct pixels to update by using the camera's rotation and the horizontal fov</b>
-  </div>
+<div class="split-grid">
+  <div class="column"><b> Each frame I use the slice to update a panorama. I find the correct pixels to update by using the camera's rotation and the horizontal fov</b></div>
+  <div class="column"><b>I send the Panorama to my compute and sort a slice of it.<br>
+  When figuring out whee a pixel belongs I replace the UVs V value with the red channel value<br>
+  To the red channel I add 1 divided by the panoramas vertical resolution.<br>
+  On the green channel I save the height difference if it's lower than the current value</b></div>
 </div>
 
-<div class="row" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/Panorama.png %}" alt="Image 1" />
-    </span>
+<div class="split-grid bottom-gap">
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/Panorama.png %}" /></span>
   </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PS1_SortedTexture.png %}" alt="Image 2" />
-    </span>
-  </div>
-</div>
-
-
-
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <b>I start by unwraping it with a circular UV.</b>
-  </div>
-  <div class="6u$ 12u$(small)">
-    <b>I use the red channel as strenght</b>
-  </div>
-</div>
-
-<div class="row" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PS2_UvCircle.png %}" alt="Image 1" />
-    </span>
-  </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PS3_RedAndCircle.png %}" alt="Image 2" />
-    </span>
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/PS1_SortedTexture.png %}" /></span>
   </div>
 </div>
 
 
 
 
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <b>SampleText</b>
+<div class="split-grid">
+  <div class="column"><b>I start by unwraping it with a circular UV.</b></div>
+  <div class="column"><b>I use the red channel as the emissive strength</b></div>
+</div>
+
+<div class="split-grid bottom-gap">
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/PS2_UvCircle.png %}" /></span>
   </div>
-  <div class="6u$ 12u$(small)">
-    <b> SampleText<br></b>
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/PS3_RedAndCircle.png %}" /></span>
   </div>
 </div>
 
-<div class="row" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PS3_GreenAndColor.png %}" alt="Image 1" />
-    </span>
+<div class="split-grid">
+  <div class="column"><b>I put the green channel through a color ramp </b></div>
+  <div class="column"><b>I multiply them together</b></div>
+</div>
+
+<div class="split-grid bottom-gap">
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/PS3_GreenAndColor.png %}" /></span>
   </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PS4_Combined.png %}" alt="Image 2" />
-    </span>
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/PS4_Combined.png %}" /></span>
+  </div>
+</div>
+
+<div class="split-grid">
+  <div class="column"><b>As a final artistic touch I create a scan sweep mask </b></div>
+  <div class="column"><b>Final result</b></div>
+</div>
+
+<div class="split-grid bottom-gap">
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/ScanLine.png %}" /></span>
+  </div>
+  <div class="column">
+    <span class="image fit"><img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" /></span>
   </div>
 </div>
