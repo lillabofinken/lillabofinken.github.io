@@ -6,7 +6,7 @@ image: assets/images/Sonar/ActiveSonar.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
-<p> I used Pipe models made by Kim Betsgren <br><a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
+<p> I used Pipe models made by <br><a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
 
 <img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
 
@@ -122,15 +122,19 @@ nav-menu: true
 </div>
 
 
-<h4>Topographic Map</h4>
-
-<img src="{% link assets/images/Sonar/Map.png %}" alt="Image 1" />
-
+<div>
+  <h4>Topographic Map</h4>
+  <img src="{% link assets/images/Sonar/Map.png %}" alt="Image 1" />
+</div>
+<div></div>
 
 <div class="split-grid">
-  <div class="column"><b>To generate the map texture I send the heightmap to a compute shader.<br>
+  <div class="column"><b>To generate the map texture I send the landscape heightmap to a compute shader.<br>
+  I force the height map in to steps of the distance between contour line<br>
+  To figure out if a pixel shoud be a line I check it's neighbour within the distance of the line thickness to see if any of them have a different value.
   </b></div>
-  <div class="column"><b>Final result</b></div>
+  <div class="column"><b>I do the same for the index lines but the contour line distance is multiplied by a whole number<br>
+  I save the contour lines and red, index lines as green, heightmap as blue and the stepped heightmap as alpha since I already have it</b></div>
 </div>
 
 <div class="split-grid bottom-gap">
