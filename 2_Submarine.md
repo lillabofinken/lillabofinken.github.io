@@ -145,3 +145,11 @@ nav-menu: true
     <span class="image fit"><img src="{% link assets/images/Sonar/MapTextureChannels.png %}" /></span>
   </div>
 </div>
+
+<div>
+  <h4>Passive Sonar</h4>
+  <img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" />
+</div>
+<div></div>
+The passive sonar is quite simple. It's a waterfall graff, vertical being time, new information being on top, old at the bottom and horizontal being angle. <br>
+It's done in a compute shader that constantly scrolls the texture down and updates the top row of pixels.<br>
