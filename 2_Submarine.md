@@ -6,10 +6,10 @@ image: assets/images/Sonar/ActiveSonar.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
+<p> I used Pipe models made by Kim Betsgren <br><a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
 
 <img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
 
-I used Pipe models made by Kim Betsgren https://www.artstation.com/kim_betsgren
 
 <h4>Imaging Sonar</h4>
 <div class="row 50%" style="margin-top:0;">
