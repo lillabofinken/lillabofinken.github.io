@@ -13,6 +13,9 @@ nav-menu: true
 For the landscape I used heightmaps from <a href="https://www.fab.com/listings/11388bc3-c13a-4c2f-b7d0-578022969a60
 "> StampIT! Collection - FREE Examples by Rowlan </a> </p>
 
+Add shadeup
+
+intro text
 
 
 <p> My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
