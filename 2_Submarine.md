@@ -2,7 +2,7 @@
 layout: post
 title: Imaging Sonar
 description:
-image: assets/images/sonar/ActiveSonar.png
+image: assets/images/Sonar/ActiveSonar.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
