@@ -1,61 +1,114 @@
 ---
 layout: post
-title: Submarine
+title: Imaging Sonar Game Prototype
 description:
 image: assets/images/Sonar/ActiveSonar.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
-<p> I used Pipe models made by <br><a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
+<p> I used Pipe models made by <a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
 
 <img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
 
+<h4>Intro</h4>
+This is a submarine game prototype I made with imaging sonar, passive sonar and a topographic map.
 
-<h4>Imaging Sonar</h4>
+The idea is that the imaging sonar ( Center ) is your eyes and to figure out where you are you'd need to compare the map ( Left ) to the imaging sonar. The passive sonar's ( Right ) purpose would be to locate points of interests or dangers.
+
+The imaging sonar transforms a 360° panorama into a top down view.
+
+This is a remake of a project I did during my time at playground squad. I wanted to see what I could do differently with what I’ve learned at TGA. The old project was done almost entirely on the cpu which gave cool results but was terrible for performance. My goal with the remake was to have it run on the gpu with compute shaders to get better performance.
+
+The main focus is the Imaging Sonar while the Passive Sonar and Map are supporting pieces.
+
+The project was originally inspired by the torpedo scene in hunt for red october and a smarter every day’s video about passive sonar.
+
+
+
+<h2>Imaging Sonar</h2>
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <b> I have a rotating camera that I use to capture a small 2 degree slice each frame.<br>
-    It uses a custom projection matrix to allow me to control vertical and horizontal FOV separetly.<br>
-    To get the data I want from the capture I apply a post process material before it's saved to a render texture</b>
+    <h4> Depth Panorama </h4>
+    I needed to generate a 360° panorama.
+    <br>
+    Using a Scene Capture Cube would not allow for independent control over horizontal and vertical resolution. It was also too expensive as it renders a full 360° view while I only need to update a small slice each frame.
+    <br><br>
+    Instead, I captured the panorama incrementally by rotating a narrow-FOV Scene Capture 2D and stitching the slices together.
+    <br><br>
+    However, the default Scene Capture 2D does not support independent control over  horizontal and vertical FOV. To solve this, I implemented a custom Scene Capture 2D with a modified projection matrix, enabling full control over both axes.
+
   </div>
-  <div class="0.1u$ 12u$(small)">
+  <div class="6u$ 12u$(small)">
     <span class="image fit">
-      <img src="{% link assets/images/Sonar/SonarSlice.png %}" alt="Image 1" />
+      <img src="{% link assets/images/Sonar/SonarScan.gif %}" alt="Image 1" />
+      <img src="{% link assets/images/Sonar/Panorama.png %}" alt="Image 1" />
+
     </span>
   </div>
 </div>
+<br><br><br><br>
+
+
+
 
 <div class="row 50%" style="margin-top:0;">
-  <div class="4u 12u$(small)">
-    <b>In the Red Channel I save the horizontal distance.</b>
+  <div class="6u 12u$(small)">
+    <h4> Separating horizontal and vertical distance </h4>
+
+    When using standard depth, the distance is taken along the view ray. This means that deeper areas of the ocean floor appear farther away, even if they are directly below the submarine.
+    <br><br>
+    For a top-down view, this creates distortion. Points that are deeper are pushed outward when sorting pixels by distance. Standard depth also does not give enough information to determine how deep a point is relative to the submarine.
+    <br><br>
+    To address this, I separate horizontal and vertical distance into two channels using a post-process material. I get the vector from the camera to each pixel in world space. 
+    <br><br>
+    I store the horizontal distance, which is the length of the XY components, in the red channel. 
+    I store the vertical distance, which is the Z component, in the green channel.
+    <br><br>
+    By doing this, I can sort pixels based purely on horizontal distance from the submarine, producing an undistorted top-down view, while using the vertical distance for the color.
+    <br><br>
+    I divide both distances by the maximum sonar range to normalize them.
+
   </div>
-  <div class="4u 12u$(small)">
-    <b>In the Green Channel I save the vertical distance.</b>
-  </div>
-  <div class="4u$ 12u$(small)">
-    <b>This is the result.</b>
+  <div class="6u$ 12u$(small)">
+    <div class="row 50%" style="margin-top:0;">
+      <div class="6u 12u$(small)">
+        <img src="{% link assets/images/Sonar/PostPrecess_Combined.png %}" alt="Image 1" />
+        Combined distance
+        <img src="{% link assets/images/Sonar/Distortion_Pre.png %}" alt="Image 1" />
+      </div>      
+      <div class="6u$ 12u$(small)">
+        <img src="{% link assets/images/Sonar/Distortion.gif %}" alt="Image 1" />
+        Seperated distance
+        <img src="{% link assets/images/Sonar/Distortion_Post.png %}" alt="Image 1" />
+      </div>
+    </div>
+
+
   </div>
 </div>
+<br><br><br><br>
+
 
 <div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Turning the panorama into a top down image </h4>
 
-  <div class="4u 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PostProcess_R.png %}" alt="Image 1" />
-    </span>
   </div>
+  <div class="6u$ 12u$(small)">
+    <div class="row 50%" style="margin-top:0;">
+      <div class="6u 12u$(small)">
+       Sample tezt
+      </div>      
+      <div class="6u$ 12u$(small)">
+        Sample right
+      </div>
+    </div>
 
-  <div class="4u 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PostProcess_G.png %}" alt="Image 2" />
-    </span>
+
   </div>
-  
-  <div class="4u$ 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Sonar/PostProcess_RG.png %}" alt="Image 2" />
-    </span>
-  </div>
+</div>
+<br><br><br><br>
+
 
 
 
