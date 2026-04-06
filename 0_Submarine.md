@@ -278,7 +278,7 @@ After that, I can start sending parameters to the shader and focus on writing th
   <div class="6u$ 12u$(small)">
     <b>Video demonstration</b>
     <video autoplay muted loop controls style="width: 70%;">
-      <source src="{% link assets/images/Sonar/PasiveSonar_Example_Short2X.mp4 %}" type="video/mp4">
+      <source src="{{ '/assets/images/Sonar/PasiveSonar_Example_Short2X.mp4' | relative_url }}" type="video/mp4">
     </video>
   </div>
 </div>
