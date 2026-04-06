@@ -237,7 +237,7 @@ After that, I can start sending parameters to the shader and focus on writing th
       <b>Detail for height and color<br>
       Pileup now share the 0-1 range with the heightmap</b>
        <video autoplay controls muted loop style="width: 100%;">
-      <source src="{% link assets/images/Snow/Video/PomToPileup.mp4 %}" type="video/mp4">
+      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/PomToPileup.mp4" type="video/mp4">
       </video>
 
     </span>
@@ -269,7 +269,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <span class="image fit">
       <b>The detail texture being applied</b>
       <video autoplay controls muted loop style="width: 100%;">
-      <source src="{% link assets/images/Snow/Video/PileupToDetail.mp4 %}" type="video/mp4">
+      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/PileupToDetail.mp4" type="video/mp4">
       </video>
       <img src="{% link assets/images/Snow/DetailTexture.png %}" alt="Image 1" style="width: 100%"/>
     </span>
