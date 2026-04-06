@@ -39,6 +39,8 @@ markdown: kramdown
 sass:
   style: compressed
 
+include:
+  - assets/images/Sonar/PasiveSonarExample_2x.mp4
 exclude:
 - "*.gemspec"
 - LICENSE.md
