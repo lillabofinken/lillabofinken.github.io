@@ -310,3 +310,6 @@ After that, I can start sending parameters to the shader and focus on writing th
   <source src="https://github.com/lillabofinken/lillabofinken.github.io/blob/main/assets/videos/SonarScan.mp4" type="video/mp4">
 </video>
 
+<video controls="" width="800" height="500" muted="" loop="" autoplay="">
+<source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/videos/SonarScan.mp4" type="video/mp4">
+</video>
