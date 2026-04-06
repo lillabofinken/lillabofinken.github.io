@@ -71,8 +71,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <h4>Defining the deformable area</h4>
     
     I needed to define my area for the deformable snow in world space.
-    <br><br>
-    Just using 2 positions works but would be annoying to work with because editing world positions with sliders would be very finicky.
+    Just using two positions works but would be annoying to work with because editing world positions with sliders would be very finicky.
     <br><br>
     To make the process of defining the area simpler, I created two Snow Corners( Red objects in the picture ) that I place in the world. To resize the area I just reposition the Snow Corners in world space.
   </div>
@@ -131,7 +130,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     
     The issue with just using one channel for the snow is that the deformation and the pileup that I want around the deformed area would need to be baked into the same channel. This would make it harder to separate the deformed area and the pileup for applying the detailed textures. It would also mean I would be unable to iterate on the pileup settings on the fly through the material.
     <br><br>
-    That’s why I decided to use two channels instead, red for deformation and green for pileup. This means that I could have control over how the channels get applied. It also gives me 2 perfect masks for the deformation and pileup that I can use to apply the detail textures later.
+    That’s why I decided to use two channels instead, red for deformation and green for pileup. This means that I could have control over how the channels get applied. It also gives me two perfect masks for the deformation and pileup that I can use to apply the detail textures later.
     <br><br>
     When the snow remained untouched it looked really flat and boring. To solve this I added some random noise to the heightmap ( Red channel ) at startup to get some subtle height variation in the untouched snow.
     <br><br>
@@ -175,9 +174,8 @@ After that, I can start sending parameters to the shader and focus on writing th
   <div class="6u$ 12u$(small)">
     <span class="image fit">
       <b>Vertecies being raised</b>
-      <video autoplay controls muted loop style="width: 100%;">
-      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/VertRaise.mp4" type="video/mp4">
-      </video>
+      <img src="{% link assets/images/Snow/Video/VertRaise.gif %}" alt="Image 1" style="width: 100%"/>
+      
 
     </span>
   </div>
@@ -204,10 +202,7 @@ After that, I can start sending parameters to the shader and focus on writing th
   <div class="6u$ 12u$(small)">
     <span class="image fit">
       <b>Parallax Occlusion Mapping with pixel depth offse</b>
-      <video autoplay controls muted loop style="width: 100%;">
-      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/POM.mp4" type="video/mp4">
-      </video>
-
+      <img src="{% link assets/images/Snow/Video/POM.gif %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>
 </div>
@@ -233,10 +228,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <span class="image fit">
       <b>Detail for height and color<br>
       Pileup now share the 0-1 range with the heightmap</b>
-       <video autoplay controls muted loop style="width: 100%;">
-      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/PomToPileup.mp4" type="video/mp4">
-      </video>
-
+      <img src="{% link assets/images/Snow/Video/PomToPileup.gif %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>
 </div>
@@ -265,9 +257,7 @@ After that, I can start sending parameters to the shader and focus on writing th
   <div class="6u$ 12u$(small)">
     <span class="image fit">
       <b>The detail texture being applied</b>
-      <video autoplay controls muted loop style="width: 100%;">
-      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/PileupToDetail.mp4" type="video/mp4">
-      </video>
+      <img src="{% link assets/images/Snow/Video/PileupToDetail.gif %}" alt="Image 1" style="width: 100%"/>
       <img src="{% link assets/images/Snow/DetailTexture.png %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>

@@ -10,7 +10,11 @@ nav-menu: true
 <img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
 <p> I used Pipe models made by <a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
 
-<h2>Intro</h2>
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>Intro</h4>
 This is a submarine game prototype I made with imaging sonar, passive sonar and a topographic map.
 
 The idea is that the imaging sonar ( Center ) is your eyes and to figure out where you are you'd need to compare the map ( Left ) to the imaging sonar. The passive sonar's ( Right ) purpose would be to locate points of interests or dangers.
@@ -24,6 +28,17 @@ The main focus is the Imaging Sonar while the Passive Sonar and Map are supporti
 The project was originally inspired by the torpedo scene in hunt for red october and a smarter every day’s video about passive sonar.
 
 
+
+  </div>
+
+  
+  <div class="6u$ 12u$(small)">
+    <b>Comparing the map and imaging sonar</b>
+    <img src="{% link assets/images/Sonar/MapAndSonar_Draw.png %}" alt="Image 1" style="width: 100%" />
+    
+  </div>
+</div>
+
 <h2>Shader Setup</h2>
 Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to create several files, define the required classes and functions, and make sure everything is properly connected before I can even begin writing the shader.
 To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
@@ -31,9 +46,9 @@ Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manua
 After that, I can start sending parameters to the shader and focus on writing the actual logic.
 
 
-<h2>Imaging Sonar</h2>
-<img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" />
-
+<h2>Imaging Sonar</h2><br>
+<div class="row 50%" style="margin-top:0;">
+  <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4> Depth Panorama </h4>
@@ -198,9 +213,10 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 
 
-
-<h2>Topographic Map </h2>
-<img src="{% link assets/images/Sonar/Map.png %}" alt="Image 1" />
+<div class="6u$ 12u$(small)">
+<h2>Topographic Map                                   </h2>
+</div>
+<img src="{% link assets/images/Sonar/Map.png %}" alt="Image 1" style="width: 50%" />
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
@@ -257,9 +273,10 @@ After that, I can start sending parameters to the shader and focus on writing th
 </div>
 <br><br><br><br>
 
-
+<div class="6u$ 12u$(small)">
 <h2>Passive Sonar</h2>
-<img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" />
+</div>
+<img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4>What is is passive sonar</h4>
