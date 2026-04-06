@@ -305,3 +305,7 @@ After that, I can start sending parameters to the shader and focus on writing th
   </div>
 </div>
 <br><br><br><br>
+
+<video controls class="image fit">
+  <source src="{{ '/assets/videos/SonarScan.mp4' | relative_url }}" type="video/mp4">
+</video>
