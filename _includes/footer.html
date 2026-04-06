@@ -2,24 +2,7 @@
 <section id="contact">
 	<div class="inner">
 		<section>
-			<form action="https://formspree.io/{{ site.email }}" method="POST">
-				<div class="field half first">
-					<label for="name">Name</label>
-					<input type="text" name="name" id="name" />
-				</div>
-				<div class="field half">
-					<label for="email">Email</label>
-					<input type="text" name="_replyto" id="email" />
-				</div>
-				<div class="field">
-					<label for="message">Message</label>
-					<textarea name="message" id="message" rows="6"></textarea>
-				</div>
-				<ul class="actions">
-					<li><input type="submit" value="Send Message" class="special" /></li>
-					<li><input type="reset" value="Clear" /></li>
-				</ul>
-			</form>
+			<img src="{% link assets/images/Philip_2_edit.png %}" alt="Image 1" />
 		</section>
 		<section class="split">
 			<section>
@@ -34,6 +17,13 @@
 					<span class="icon alt fa-phone"></span>
 					<h3>Phone</h3>
 					<a href="tel:{{ site.phone }}">{{ site.phone }}</a>
+				</div>
+			</section>
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-linkedin"></span>
+					<h3>LinkedIn</h3>
+					<a href="https://www.linkedin.com/in/philip-backlund">Philip Bäcklund</a>
 				</div>
 			</section>
 			<section>
@@ -63,7 +53,7 @@
 	</div>
 </section>
 
-<!-- Footer -->
+<!-- Footer 
 	<footer id="footer">
 		<div class="inner">
 			<ul class="icons">
@@ -81,7 +71,7 @@
 		</div>
 	</footer>
 </div>
-
+-->
 <!-- Scripts -->
 	<script src="{{ "assets/js/jquery.min.js" | absolute_url }}"></script>
 	<script src="{{ "assets/js/jquery.scrolly.min.js" | absolute_url }}"></script>

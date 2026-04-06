@@ -13,6 +13,7 @@ zip_code:
 country: Sweden
 phone: +46 76 777 83 99
 
+
 # homepage tiles
 tiles-source: pages # accepts "posts" or "pages"
 tiles-count: 6
