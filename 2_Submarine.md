@@ -72,13 +72,15 @@ The project was originally inspired by the torpedo scene in hunt for red october
   <div class="6u$ 12u$(small)">
     <div class="row 50%" style="margin-top:0;">
       <div class="6u 12u$(small)">
+        <b>Post Process</b>
         <img src="{% link assets/images/Sonar/PostPrecess_Combined.png %}" alt="Image 1" />
-        Combined distance
+        <b>Combined distance</b>
         <img src="{% link assets/images/Sonar/Distortion_Pre.png %}" alt="Image 1" />
       </div>      
       <div class="6u$ 12u$(small)">
+      <b>Distortion Example</b>
         <img src="{% link assets/images/Sonar/Distortion.gif %}" alt="Image 1" />
-        Seperated distance
+        <b>Seperated distance</b>
         <img src="{% link assets/images/Sonar/Distortion_Post.png %}" alt="Image 1" />
       </div>
     </div>
@@ -92,15 +94,56 @@ The project was originally inspired by the torpedo scene in hunt for red october
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4> Turning the panorama into a top down image </h4>
+    I already have the data I need in the panorama, but it isn’t arranged as a top-down view. So I rearrange it into one.
+    <br><br>
+    I do this by sorting the pixels based on their horizontal distance, stored in the red channel. Because this value is already normalized, I can use it directly to set each pixel’s V coordinate.
+    <br><br>
+    For each pixel, I add 1.0 / PanoramaVerticalResolution to the red channel and store the vertical distance from the panorama in the green channel.
+    <br><br>
+    Using 1.0 / PanoramaVerticalResolution means the final red channel values would still be similar if I were to change the panorama resolution.
+    <br><br>
+    When multiple pixels map to the same coordinate, their red values accumulate. This naturally highlights surfaces like walls or steep slopes, where many pixels share the same horizontal distance.
+    <br><br>
+    For the green channel, I keep the lowest vertical distance from the pixels that end up at the same coordinate. This saves the information about the point closest to the submarine.
+
+  </div>
+  <div class="6u$ 12u$(small)">
+  <b>Panorama Sorted in to a top down view</b>
+  <img src="{% link assets/images/Sonar/PS1_SortedTexture.png %}" alt="Image 1" />
+    <div class="row 50%" style="margin-top:0;">
+      <div class="6u 12u$(small)">
+        <b>Red Channel</b> <br>
+        <b>Accumulation Highlight</b>
+        <img src="{% link assets/images/Sonar/Red_Sorted.png %}" alt="Image 1" />
+      </div>     
+      <div class="6u$ 12u$(small)">
+        <b>Green Channel</b> <br>
+        <b>Vertical Distance</b>
+        <img src="{% link assets/images/Sonar/Green_Sorted.png %}" alt="Image 1" />
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    
+    To make the top-down view intuitive, I warp the UV into a disc shape which puts the submarine at the center. This way, distances radiate outward from the center, making it easy to understand what’s forward, behind, or to the sides of the submarine.
+
 
   </div>
   <div class="6u$ 12u$(small)">
     <div class="row 50%" style="margin-top:0;">
       <div class="6u 12u$(small)">
-       Sample tezt
-      </div>      
+        <b>Disc shaped UV</b>
+        <img src="{% link assets/images/Sonar/UV.png %}" alt="Image 1" />
+      </div>     
       <div class="6u$ 12u$(small)">
-        Sample right
+        <b>Sorted Panorama with disc UV</b>
+        <img src="{% link assets/images/Sonar/PS2_UvCircle.png %}" alt="Image 1" />
+
       </div>
     </div>
 
