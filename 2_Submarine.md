@@ -6,9 +6,9 @@ image: assets/images/Sonar/ActiveSonar.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
-<p> I used Pipe models made by <a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
 
 <img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
+<p> I used Pipe models made by <a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
 
 <h4>Intro</h4>
 This is a submarine game prototype I made with imaging sonar, passive sonar and a topographic map.
@@ -22,7 +22,6 @@ This is a remake of a project I did during my time at playground squad. I wanted
 The main focus is the Imaging Sonar while the Passive Sonar and Map are supporting pieces.
 
 The project was originally inspired by the torpedo scene in hunt for red october and a smarter every day’s video about passive sonar.
-
 
 
 <h2>Imaging Sonar</h2>
