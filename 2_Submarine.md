@@ -26,6 +26,8 @@ The project was originally inspired by the torpedo scene in hunt for red october
 
 
 <h2>Imaging Sonar</h2>
+<img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" />
+
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4> Depth Panorama </h4>
@@ -40,8 +42,8 @@ The project was originally inspired by the torpedo scene in hunt for red october
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
-      <img src="{% link assets/images/Sonar/SonarScan.gif %}" alt="Image 1" />
-      <img src="{% link assets/images/Sonar/Panorama.png %}" alt="Image 1" />
+      <img src="{% link assets/images/Sonar/SonarScan.gif %}" alt="Image 1" style="width: 70%"/>
+      <img src="{% link assets/images/Sonar/Panorama.png %}" alt="Image 1" style="width: 70%"/>
 
     </span>
   </div>
@@ -84,8 +86,6 @@ The project was originally inspired by the torpedo scene in hunt for red october
         <img src="{% link assets/images/Sonar/Distortion_Post.png %}" alt="Image 1" />
       </div>
     </div>
-
-
   </div>
 </div>
 <br><br><br><br>
@@ -120,13 +120,11 @@ The project was originally inspired by the torpedo scene in hunt for red october
         <b>Green Channel</b> <br>
         <b>Vertical Distance</b>
         <img src="{% link assets/images/Sonar/Green_Sorted.png %}" alt="Image 1" />
-
       </div>
     </div>
-
-
   </div>
 </div>
+
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     
@@ -155,98 +153,149 @@ The project was originally inspired by the torpedo scene in hunt for red october
 
 
 
-<div class="split-grid">
-  <div class="column"><b> Each frame I use the slice to update a panorama. I find the correct pixels to update by using the camera's rotation and the horizontal fov</b></div>
-  <div class="column"><b>I send the Panorama to my compute and sort a slice of it.<br>
-  When figuring out whee a pixel belongs I replace the UVs V value with the red channel value<br>
-  To the red channel I add 1 divided by the panoramas vertical resolution.<br>
-  On the green channel I save the height difference if it's lower than the current value</b></div>
-</div>
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>Color and final touches</h4>
+    The resulting image contains all the information we need, but it’s not very readable or visually clear. To make it easier to interpret, I put the green channel through a color ramp to create a red->green->blue gradient. Red indicates heights similar to the submarine and potential collision risks, while green and blue show safer distances. I then use the red channel to control the emissive strength, highlighting slopes and walls.
+    <br><br>
+    When the submarine isn't moving, sonar updates show very similar data, making it hard to see what’s being updated. To highlight the current update area, I add a rotating fade using the circular U coordinate to reduce emissive strength over distance. Pixels fade out over time and become bright again once the pixel is updated, giving visual feedback on the area of the map that's being updated.
 
-<div class="split-grid bottom-gap">
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/Panorama.png %}" /></span>
+
+
   </div>
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/PS1_SortedTexture.png %}" /></span>
-  </div>
-</div>
+  <div class="6u$ 12u$(small)">
+    <div class="row 50%" style="margin-top:0;">
+      <div class="6u 12u$(small)">
+        <b>Green Channel</b> <br>
+        <b>Vertical Distance</b>
+        <img src="{% link assets/images/Sonar/Green_Sorted_Disc.png %}" alt="Image 1" />
+        <b>Color Ramp</b>
+        <img src="{% link assets/images/Sonar/PS3_GreenAndColor.png %}" alt="Image 1" />
+        <b>Scan Line</b>
+        <img src="{% link assets/images/Sonar/ScanLine.png %}" alt="Image 1" />
+      </div>
+      <div class="6u$ 12u$(small)">
+        <b>Red Channel</b> <br>
+        <b>Accumulation Highlight</b>
+        <img src="{% link assets/images/Sonar/Red_Sorted_Disc.png %}" alt="Image 1" />
+        <b>Color Ramp * Red channel</b>
+        <img src="{% link assets/images/Sonar/PS4_Combined.png %}" alt="Image 1" />
+        <b>Final result</b>
+        <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" />
+      </div>     
+    </div>
 
 
-
-
-<div class="split-grid">
-  <div class="column"><b>I start by unwraping it with a circular UV.</b></div>
-  <div class="column"><b>I use the red channel as the emissive strength</b></div>
-</div>
-
-<div class="split-grid bottom-gap">
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/PS2_UvCircle.png %}" /></span>
-  </div>
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/PS3_RedAndCircle.png %}" /></span>
-  </div>
-</div>
-
-<div class="split-grid">
-  <div class="column"><b>I put the green channel through a color ramp </b></div>
-  <div class="column"><b>I multiply them together</b></div>
-</div>
-
-<div class="split-grid bottom-gap">
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/PS3_GreenAndColor.png %}" /></span>
-  </div>
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/PS4_Combined.png %}" /></span>
   </div>
 </div>
+<br><br><br><br>
 
-<div class="split-grid">
-  <div class="column"><b>As a final artistic touch I create a scan sweep mask </b></div>
-  <div class="column"><b>Final result</b></div>
-</div>
 
-<div class="split-grid bottom-gap">
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/ScanLine.png %}" /></span>
+
+
+<h2>Topographic Map </h2>
+<img src="{% link assets/images/Sonar/Map.png %}" alt="Image 1" />
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>Generating the map texture</h4>
+    I generate a topographic map so the player can use it together with the imaging sonar to figure out their position relative to the terrain.
+    <br><br>
+    To do this, I take the landscape heightmap and process it in a compute shader. I also send in parameters for the contour line spacing, index line spacing, and the thickness of the lines.
+    <br><br>
+    To place the contour lines, I step the height values based on the contour line spacing so I can detect edges between levels. For example, with a spacing of 1.5 meters, the values become 0, 1.5, 3.0, 4.5…
+    <br><br>
+    To detect where lines should appear, I sample neighboring pixels within a radius defined by the line thickness. If a neighbor has a different stepped value,an edge has been found and the pixel contributes to a line. The closer the neighbor is, the stronger the contribution, and I keep the highest value. This produces a soft edge that effectively works as anti-aliasing.
+    <br><br>
+    I generate both contour lines and index lines at the same time so I can reuse the sampled values and avoid duplicate work.
+    <br><br>
+    Index lines use a larger step interval, based on a multiple of the contour spacing. The contour lines are stored in the red channel and index lines in green.
+    <br><br>
+    Since I already have the data, I also store the stepped heightmap and the original heightmap in the blue and alpha channels. This gives me flexibility later when making the display material for the map, without needing to go back and change the compute shader.
+    <br><br>
+    
+
+
   </div>
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" /></span>
-  </div>
-</div>
-
-
-<div>
-  <h4>Topographic Map</h4>
-  <img src="{% link assets/images/Sonar/Map.png %}" alt="Image 1" />
-</div>
-<div></div>
-
-<div class="split-grid">
-  <div class="column"><b>To generate the map texture I send the landscape heightmap to a compute shader.<br>
-  I force the height map in to steps of the distance between contour line<br>
-  To figure out if a pixel shoud be a line I check it's neighbour within the distance of the line thickness to see if any of them have a different value.
-  </b></div>
-  <div class="column"><b>I do the same for the index lines but the contour line distance is multiplied by a whole number<br>
-  I save the contour lines and red, index lines as green, heightmap as blue and the stepped heightmap as alpha since I already have it</b></div>
-</div>
-
-<div class="split-grid bottom-gap">
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/MapTexture.png %}" /></span>
-  </div>
-  <div class="column">
-    <span class="image fit"><img src="{% link assets/images/Sonar/MapTextureChannels.png %}" /></span>
+  <div class="6u$ 12u$(small)">
+    <b>Map Texture</b><br>
+    <img src="{% link assets/images/Sonar/MapTexture.png %}" alt="Image 1" style="width: 70%" />
+    <br>
+    <b>Map Texture 4 channels</b><br>
+    <img src="{% link assets/images/Sonar/MapTextureChannels.png %}" alt="Image 1" style="width: 70%" />
   </div>
 </div>
 
-<div>
-  <h4>Passive Sonar</h4>
-  <img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" />
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <b>Heightmap Resolution Issue</b>
+    <br>
+    The original heightmap is lower resolution than the final map texture, which makes the source resolution visible in the result. Without any changes, the contour lines appear blocky and follow the original pixel grid.
+    <br><br>
+    To reduce this, I sample a few neighboring pixels and average the result to blur the data slightly. This removes the stair-stepping effect, giving me smooth lines.
+
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <div class="row 50%" style="margin-top:0;">
+      <div class="6u 12u$(small)">
+        <b>Low resolution issue</b>
+        <img src="{% link assets/images/Sonar/Resolution_Issue.png %}" alt="Image 1" />
+      </div>     
+      <div class="6u$ 12u$(small)">
+        <b>Resolution fixed</b>
+        <img src="{% link assets/images/Sonar/ResIssue_Fix.png %}" alt="Image 1" />
+      </div>
+    </div>
+  </div>
 </div>
-<div><b>The passive sonar is quite simple. It's a waterfall graff, vertical being time, new information being on top, old at the bottom and horizontal being angle. <br>
-It's done in a compute shader that constantly scrolls the texture down and updates the top row of pixels.<br>
-On the top row I first add just an ambient noise that's supposed to be the ambient noise of the sea.<br>
-Secondly I send an array of positions of noise emitting objects that I use to add lines of noise to the top row. The strenght and thickness being dependent on distance from the player. The position being dependent on angle from the players forward direction. ( 90° left = U0 ) ( 0° = U0.5 ) ( 90° right = U1 ) </b></div>
+<br><br><br><br>
+
+
+<h2>Passive Sonar</h2>
+<img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" />
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>What is is passive sonar</h4>
+    The passive sonar is a waterfall graph that shows the direction towards certain objects in the world. The idea is that these objects would be points of interest or dangers like torpedoes.
+    <br><br>
+    On the graph the vertical axis is time, where new information is at the top and scrolls down with time.
+    <br><br>
+    The horizontal axis is the angle to the object. 0° is the center of the center and 90° right is the right edge of the image.
+    <br><br>
+    In the video, you can see the submarine ( Green Box ), 3 targets ( Red ) and the passive sonar waterfall graph that’s tracking the 3 targets.
+
+
+  </div>
+
+  
+  <div class="6u$ 12u$(small)">
+    <b>Video demonstration</b>
+    <video autoplay muted loop controls style="width: 70%;">
+      <source src="{% link assets/images/Sonar/PasiveSonar_Example_Short2X.mp4 %}" type="video/mp4">
+    </video>
+  </div>
+</div>
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>How the passive sonar works</h4>
+    I use noise to give a hint about the distance from the objects. 
+    <br><br>
+    I send the submarine position and object positions to a compute shader and calculate the angle to each object to place the signal along the horizontal axis.
+    <br><br>
+    At that position, I add noise to the top row of the texture. The noise is strongest at the object’s angle and fades outward from that point. The spread depends on distance, so closer objects produce tighter and stronger signals.
+    <br><br>
+    Each frame, the texture scrolls downward to create the waterfall effect. I also add a layer of ambient noise so the display remains active even when there are no strong signals present.
+
+
+
+  </div>
+
+  
+  <div class="6u$ 12u$(small)">
+    <b>Tracked object en 30° left</b>
+    <img src="{% link assets/images/Sonar/PasiveSonar_AngleExample.png %}" alt="Image 1" style="width: 70%" />
+    
+  </div>
+</div>
+<br><br><br><br>
