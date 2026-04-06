@@ -40,7 +40,7 @@ sass:
   style: compressed
 
 include:
-  - assets/images/Sonar/PasiveSonarExample_2x.mp4
+  - assets/images/Sonar/PasiveSonar_Example_Short2X.mp4
 exclude:
 - "*.gemspec"
 - LICENSE.md
