@@ -13,103 +13,386 @@ nav-menu: true
 For the landscape I used heightmaps from <a href="https://www.fab.com/listings/11388bc3-c13a-4c2f-b7d0-578022969a60
 "> StampIT! Collection - FREE Examples by Rowlan </a> </p>
 
-Add shadeup
-
-intro text
-
-
 <p> My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspired me to make sure that my snow was not limited to flat ground </p>
 
-<b>I have 2 objects, Snow Corners, that are used to define the area for deformable snow. </b>
-<img src="/assets/images/SnowCorners.png" alt="Description">
-
-<b>I have a deformation manager that keeps track of all objects that can deform the snow.<br>
-It sends the Snow corner positions, max snow depth and the matrices of the object. <br>
-The manager replaces the vertical position in the matrices with how high the object is from deformable ground which I get from a line trace.</b>
-<img src="/assets/images/FootExample.png" alt="Description">
-
-<b>I have a render texture used as a heightmap for the snow that on startup has its red channel filled with noise between 0.8-1.0  to make undisturbed snow more interesting.</b>
-
-<b>In the compute shader I use the matrices positions and scales to calculate sphere intersections with the snow and lower the heightmap value accordingly. In the green channel I paint a larger area around it that will be used for the pileup on the edges of the tracks.</b>
-<img src="/assets/images/Heightmap.png" alt="Description">
 
 
-<h3>Now for the material</h3>
 
 
-<div style="margin:0; padding:0;">
-  <b style="margin:0; padding:0; display:block;">
-    I start by raising the vertices by the max snow height.
-  </b>
+<h2>Shader Setup</h2>
+Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to create several files, define the required classes and functions, and make sure everything is properly connected before I can even begin writing the shader.
+To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
+Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
+After that, I can start sending parameters to the shader and focus on writing the actual logic.
 
-  <div class="row 50%" style="margin-top:0;">
-    <div class="6u 12u$(small)">
-      <span class="image fit">
-        <img src="{% link assets/images/Snow0_Original.png %}" alt="Image 1" />
-      </span>
-    </div>
-    <div class="6u$ 12u$(small)">
-      <span class="image fit">
-        <img src="{% link assets/images/Snow1_WPO.png %}" alt="Image 2" />
-      </span>
-    </div>
+
+<h2>Imaging Sonar</h2>
+<img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" />
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h2> Decision to use POM </h2>
+    When I first started the project I was debating on if I was going to use Nantie or Parallax Occlusion Mapping (POM). I had a stretch goal of adding a POM/Nanite toggle. 
+    <br><br>
+    I first tried to use Nanite but I had issues working with Nanite’s displacement direction. 
+    <br><br>
+    I was 50/50 on if I was going to use nanite or Parallax Occlusion Mapping (POM). 
+    <br><br>
+    Originally I wanted to use POM but decided on nanite because of some experiments I did, adding snow on objects using Nanite displacement by adding a bevel on meshes. The decision to use Nanite was also because it’s easier to work with. 
+    <br><br>
+    I had a stretch goal of adding a POM/Nanite toggle.
+    <br><br>
+    When working I had an issue with Nanite’s displacement direction, because it’s based on the vertex normal which works fine for flat ground but looks bad on slopes.
+    <br><br>
+    I tried to force all vertex normals to point up while saving the real vertex normals as vertex color and fixing it in the material. But I wanted to use landscapes and from what I found it would need to modify the engine to change how landscape normals are done which would take too much time away from the snow.
+    <br><br>
+    In the end I decided to go back to POM as was originally planned.
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>Quick test for adding snow on objects with a bevel and nanite</b>
+      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
+      <b>Test with multiple bevels</b>
+      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
+
+    </span>
   </div>
 </div>
+<br><br><br><br>
 
 
-<b>I use my own modified version of Unreal’s Parallax Occlusion Mapping ( POM ) node.<br>
-I use pixel depth offset to get a much more convincing 3D effect by revealing things below the snow.</b>
-<img src="/assets/images/Snow3_POM.png" alt="Description">
+
+
+
+
 
 
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <b>In the custom POM node I have an input for a detail texture and I use the blue channel to add some small tiling detail and I use the same texture to break up the color a bit.</b>
+    <h4>Defining the deformable area</h4>
+    
+    I needed to define my area for the deformable snow in world space.
+    <br><br>
+    Just using 2 positions works but would be annoying to work with because editing world positions with sliders would be very finicky.
+    <br><br>
+    To make the process of defining the area simpler, I created two Snow Corners( Red objects in the picture ) that I place in the world. To resize the area I just reposition the Snow Corners in world space.
   </div>
   <div class="6u$ 12u$(small)">
-    <b>I take the green channel, multiply it by the red channel and a strength to only keep the edges and control the height. <br> 
-        I add the result and lower the red channel so that combined it’s still within a 0-1 range.<br> 
-        In the picture it’s an even split at 0.5 pileup strength.</b>
+    <span class="image fit">
+      <b>The red objects define the deformable area</b>
+      <img src="{% link assets/images/Snow/SnowCorners.png %}" alt="Image 1" style="width: 100%"/>
+    </span>
   </div>
 </div>
+<br><br><br><br>
+
+
+
+
+
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Snow5_DetailNoiseColor.png %}" alt="Image 1" />
-    </span>
+    <h4>Deformation Manager</h4>
+    
+    I need the snow corner positions, the max snow height and all the matrices of objects that can interact with the snow to be sent to a compute shader.
+    <br><br>
+    To do this, I created a manager that kept track of all the data the compute shader needed access to.
+    <br><br>
+    To get it to work on slopes I would need some way of getting the height of the ground. 
+    <br><br>
+    I decided to bake this information into the matrices vertical positions. To achieve this the manager does linetraces downwards from the object and replaces the vertical position of the matrices with the hit distance.
+    This means that the vertical position becomes local to the ground below.
+    <br><br>
+
+    The reason why I decided to send entire matrices is because I had ambitions of adding support for multiple shapes which in the end I did not have time to do. I currently only have support for spheres.
+
+
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
-      <img src="{% link assets/images/Snow6_Pileup.png %}" alt="Image 2" />
+      <b>The line trace that gets the foots distance from the ground</b>
+      <img src="{% link assets/images/Snow/FootExample.png %}" alt="Image 1" style="width: 100%"/>
+
     </span>
   </div>
 </div>
+<br><br><br><br>
+
+
+
+
+
+
 
 
 <div class="row 50%" style="margin-top:0;">
-  <div class="6u 0u$(small)">
-    <b>In the custom POM function I use the green channel as a mask for the green channel of the detail texture.</b>
+  <div class="6u 12u$(small)">
+    <h4>Height map render target from Compute Shader</h4>
+    
+    The issue with just using one channel for the snow is that the deformation and the pileup that I want around the deformed area would need to be baked into the same channel. This would make it harder to separate the deformed area and the pileup for applying the detailed textures. It would also mean I would be unable to iterate on the pileup settings on the fly through the material.
+    <br><br>
+    That’s why I decided to use two channels instead, red for deformation and green for pileup. This means that I could have control over how the channels get applied. It also gives me 2 perfect masks for the deformation and pileup that I can use to apply the detail textures later.
+    <br><br>
+    When the snow remained untouched it looked really flat and boring. To solve this I added some random noise to the heightmap ( Red channel ) at startup to get some subtle height variation in the untouched snow.
+    <br><br>
+    
+    When calculating the collision I treat all objects as spheres and use the matrices for position and scale.
+    <br><br>
+    I calculate the intersection between the spheres and the snow, if an intersection is found I lower the heightmap (Red channel) by the intersection amount.
+    <br><br>
+    For the pileup I raise the value in the green channel around the spheres at a larger distance than the radius of the sphere to get it around the deformed snow.
+
+
+
   </div>
-  <div class="6u$ 0u$(small)">
-    <b>Same for the red channels.</b>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>The render target result from the compute shader<br>
+      Red: Snow heightmap<br>
+      Green: Pileup mask</b>
+      <img src="{% link assets/images/Snow/Heightmap.png %}" alt="Image 1" style="width: 100%"/>
+
+    </span>
   </div>
 </div>
+<br><br><br><br>
+
+
+
+
+
+
+
+
+
 
 <div class="row 50%" style="margin-top:0;">
-  <div class="6u 0u$(small)">
-    <span class="image fit">
-      <img src="{% link assets/images/Snow7_PileuptDetail.png %}" alt="Image 1" />
-    </span>
+  <div class="6u 12u$(small)">
+    <h4> Raising the vertices.
+ </h4>
+    Because POM can’t occlude more than the mesh I raise the vertex positions by the max snow height.
   </div>
-  <div class="6u$ 0u$(small)">
+  <div class="6u$ 12u$(small)">
     <span class="image fit">
-      <img src="{% link assets/images/Snow8_DeformationDetail.png %}" alt="Image 2" />
+      <b>Vertecies being raised</b>
+      <video autoplay controls muted loop style="width: 100%;">
+      <source src="{% link assets/images/Snow/Video/VertRaise.mp4 %}" type="video/mp4">
+      </video>
+
     </span>
   </div>
 </div>
+<br><br><br><br>
 
-<b>Detail Texture I created in Substance designer for this project.<br></b>
-<img src="/assets/images/DetailTexture.png" alt="Description">
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Parallax Occlusion Mapping. </h4>
+    
+    I use the red channel from the render target as the heightmap for my POM function.
+    <br><br>
+    To avoid other objects looking like they are floating over the deformed snow I use the pixel depth offset to reveal objects below the snow to get a more convincing 3d effect.
+    <br><br>
+
+    To avoid the snow looking like smooth plastic I add in the blue channel from the detail texture to the height in the POM function to get some fine grain detail. I also use the blue channel from the detail texture to add some color variation as well on top of the small bumps.
+
+
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>Parallax Occlusion Mapping with pixel depth offse</b>
+      <video autoplay controls muted loop style="width: 100%;">
+      <source src="{% link assets/images/Snow/Video/POM.mp4 %}" type="video/mp4">
+      </video>
+
+    </span>
+  </div>
+</div>
+<br><br><br><br>
+
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Pileup </h4>
+    So far the red channel has been using 100% of the POM’s 0-1 range which leaves no range left for the pileup. 
+    <br><br>
+    To maintain a 0-1 range I added an input to the POM function that controls what amount of the range is used for the pileup and deformation. In the image it’s evenly split at a value of 0.5.
+    <br><br>
+    To avoid the pileup creeping in too much in the deformed area I multiply the pileup (Green Channel) with the heightmap (Red Channel) before adding the pileup.
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>Detail for height and color<br>
+      Pileup now share the 0-1 range with the heightmap</b>
+       <video autoplay controls muted loop style="width: 100%;">
+      <source src="{% link assets/images/Snow/Video/PomToPileup.mp4 %}" type="video/mp4">
+      </video>
+
+    </span>
+  </div>
+</div>
+<br><br><br><br>
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>Applying the detail texture</h4>
+    The snow currently has a very smooth and boring appearance. Also the resolution and distance the objects moved per frame is clearly visible in the deformation.
+    <br><br>
+    To make it look less boring while also hiding the issues I add in the Red and Green channel from the detail texture. I use the red channel of the detail texture to add detail to the deformation (Red channel). To add detail to the pileup (Green Channel) I use the green channel of the detail texture.
+
+    <br><br>
+    Because the values need to stay within a 0-1 range I need to combine the details instead of just adding it.
+    <br><br>
+    To do this I start by using the render texture channels to mask out the areas that should not have detail like outside of the deformation/pileup areas. Now I have 2 separate 0-1 values, the render target and the detail value. I do this for each channel separately.
+    <br><br>
+    To be able to have control over how much range is used for the overall shape and how much is used for the details I lerp between the detail value and render target value.
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>The detail texture being applied</b>
+      <video autoplay controls muted loop style="width: 100%;">
+      <source src="{% link assets/images/Snow/Video/PileupToDetail.mp4 %}" type="video/mp4">
+      </video>
+      <img src="{% link assets/images/Snow/DetailTexture.png %}" alt="Image 1" style="width: 100%"/>
+    </span>
+  </div>
+</div>
+<br><br><br><br>
+<img src="{% link assets/images/Snow/SnowPhilip.png %}" alt="Image 1" style="width: 100%"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Sample Text </h4>
+    Sample Text
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>TEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
+      <b>TTEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
+
+    </span>
+  </div>
+</div>
+<br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Sample Text </h4>
+    Sample Text
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>TEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
+      <b>TTEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
+
+    </span>
+  </div>
+</div>
+<br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Sample Text </h4>
+    Sample Text
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>TEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
+      <b>TTEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
+
+    </span>
+  </div>
+</div>
+<br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Sample Text </h4>
+    Sample Text
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <b>TEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
+      <b>TTEXT</b>
+      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
+
+    </span>
+  </div>
+</div>
+<br><br><br><br>
