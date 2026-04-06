@@ -179,7 +179,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <span class="image fit">
       <b>Vertecies being raised</b>
       <video autoplay controls muted loop style="width: 100%;">
-      <source src="{% link assets/images/Snow/Video/VertRaise.mp4 %}" type="video/mp4">
+      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/VertRaise.mp4" type="video/mp4">
       </video>
 
     </span>
@@ -208,7 +208,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <span class="image fit">
       <b>Parallax Occlusion Mapping with pixel depth offse</b>
       <video autoplay controls muted loop style="width: 100%;">
-      <source src="{% link assets/images/Snow/Video/POM.mp4 %}" type="video/mp4">
+      <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Snow/Video/POM.mp4" type="video/mp4">
       </video>
 
     </span>
