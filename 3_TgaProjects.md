@@ -7,10 +7,6 @@ owner: assets/images/TGA.png
 nav-menu: true
 ---
 
-
-<img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
-
-
 <h2>Tools</h2>
 
 <div class="row 50%" style="margin-top:0;">
@@ -56,7 +52,7 @@ nav-menu: true
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
-		<b>The landscape in unreal</b><br>
+		<b>The export window</b><br>
     	<img src="{% link assets/images/Bean/beanExport.png %}" alt="Image 1" style="width: 80%"/>
 
     </span>

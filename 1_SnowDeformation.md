@@ -2,11 +2,12 @@
 layout: post
 title: Snow Deformation
 description:
-image: assets/images/SnowDeformationRamp.png
+image: assets/images/Snow/HeaderShot.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
 
+<img src="{% link assets/images/Snow/HeaderShot.png %}" alt="Image 1" style="width: 100%"/>
  
 <p> For the cabin and props I used <a href="https://www.fab.com/listings/508fe84a-4976-4cfe-9a40-c2b9533da601
 "> Modular Rural Cabin by Maarten Hof </a> <br>
@@ -25,10 +26,6 @@ Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to c
 To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
 Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
 After that, I can start sending parameters to the shader and focus on writing the actual logic.
-
-
-<h2>Imaging Sonar</h2>
-<img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" />
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
@@ -277,122 +274,3 @@ After that, I can start sending parameters to the shader and focus on writing th
 </div>
 <br><br><br><br>
 <img src="{% link assets/images/Snow/SnowPhilip.png %}" alt="Image 1" style="width: 100%"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <h4> Sample Text </h4>
-    Sample Text
-  </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <b>TEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
-      <b>TTEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
-
-    </span>
-  </div>
-</div>
-<br><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <h4> Sample Text </h4>
-    Sample Text
-  </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <b>TEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
-      <b>TTEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
-
-    </span>
-  </div>
-</div>
-<br><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <h4> Sample Text </h4>
-    Sample Text
-  </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <b>TEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
-      <b>TTEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
-
-    </span>
-  </div>
-</div>
-<br><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row 50%" style="margin-top:0;">
-  <div class="6u 12u$(small)">
-    <h4> Sample Text </h4>
-    Sample Text
-  </div>
-  <div class="6u$ 12u$(small)">
-    <span class="image fit">
-      <b>TEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
-      <b>TTEXT</b>
-      <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
-
-    </span>
-  </div>
-</div>
-<br><br><br><br>
