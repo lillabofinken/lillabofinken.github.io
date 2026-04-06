@@ -4,38 +4,34 @@
 		<section>
 			<img src="{% link assets/images/Philip_2_edit.png %}" alt="Image 1" />
 		</section>
-		<section class="split">
+		<section>
 			<section>
 				<div class="contact-method">
-					<span class="icon alt fa-envelope"></span>
-					<h3>Email</h3>
+					<h3><br><br>Email</h3>
 					<a href="mailto:{{ site.email }}">{{ site.email }}</a>
 				</div>
 			</section>
 			<section>
 				<div class="contact-method">
-					<span class="icon alt fa-phone"></span>
 					<h3>Phone</h3>
 					<a href="tel:{{ site.phone }}">{{ site.phone }}</a>
 				</div>
 			</section>
 			<section>
 				<div class="contact-method">
-					<span class="icon alt fa-linkedin"></span>
 					<h3>LinkedIn</h3>
 					<a href="https://www.linkedin.com/in/philip-backlund">Philip Bäcklund</a>
 				</div>
 			</section>
 			<section>
 				<div class="contact-method">
-					<h3>My CV</h3>
+					<h3>CV</h3>
 					<a href="{{ '/assets/PhilipBacklundCV.pdf' | relative_url }}" target="_blank">  PhilipBäcklundCV.pdf
 </a>
 				</div>
 			</section>
 			<section>
 				<div class="contact-method">
-					<span class="icon alt fa-home"></span>
 					<h3>Location</h3>
 					<span>
 					{% if site.street_address %}
