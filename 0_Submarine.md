@@ -47,11 +47,12 @@ Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to c
 To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
 Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
 After that, I can start sending parameters to the shader and focus on writing the actual logic.
+<br><br><br><br>
 </div>
 
+<h2>Imaging Sonar</h2><br>
 <div class="row 50%" style="margin-top:0;">
-<h2 style="flex: 0 0 100%; margin: 0;">Imaging Sonar</h2>
-<img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
+  <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4> Depth Panorama </h4>
