@@ -49,10 +49,10 @@ Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manua
 After that, I can start sending parameters to the shader and focus on writing the actual logic.
 </div>
 
-<div class="row 50%" style="margin-top:0;">
-<div>
-<h2>Imaging Sonar</h2><br>
+<div class="row 50%" style="margin-bottom:0;">
+  <h2>Imaging Sonar</h2><br>
 </div>
+<div class="row 50%" style="margin-top:0;">
   <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
