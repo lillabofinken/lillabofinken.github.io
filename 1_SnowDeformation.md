@@ -41,6 +41,8 @@ After that, I can start sending parameters to the shader and focus on writing th
   With POM, the deformation direction issue was much less noticeable and modifications to POM would not require a custom engine build which caused me to make the final decision of focusing on POM.
   <br><br>
   I did end up adding support for nanite too and I found out that once the project was finished and the pileup and detail textures were applied to the deformation, the displacement direction issue ended up being a lot less noticeable.
+  <br><br>
+  Special thanks to <a href="https://www.marinofannar.com"> Marinó Fannar Bjarnason </a> for using Houdini to create the meshes I used in the vertex normal experiments.
 
   </div>
   <div class="6u$ 12u$(small)">
