@@ -320,7 +320,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
   
   <div class="6u$ 12u$(small)">
-    <b>Tracked object at 30° left</b>
+    <b>The pasive sonar detecting an object at 30° left</b>
     <img src="{% link assets/images/Sonar/PasiveSonar_AngleExample.png %}" alt="Image 1" style="width: 70%" />
     
   </div>
