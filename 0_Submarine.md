@@ -55,7 +55,7 @@ After that, I can start sending parameters to the shader and focus on writing th
   <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h4> Depth Panorama </h4>
+    <h4><br>Depth Panorama </h4>
     I needed to generate a 360° panorama.
     <br>
     Using a Scene Capture Cube would not allow for independent control over horizontal and vertical resolution. It was also too expensive as it renders a full 360° view while I only need to update a small slice each frame.
