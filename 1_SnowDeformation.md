@@ -9,25 +9,26 @@ nav-menu: true
 
 <img src="{% link assets/images/Snow/HeaderShot.png %}" alt="Image 1" style="width: 100%"/>
  
-<p> For the cabin and props I used <a href="https://www.fab.com/listings/508fe84a-4976-4cfe-9a40-c2b9533da601
+<p style="font-style: italic; font-size: 0.8em;"> For the cabin and props I used <a href="https://www.fab.com/listings/508fe84a-4976-4cfe-9a40-c2b9533da601
 "> Modular Rural Cabin by Maarten Hof </a> <br>
 For the landscape I used heightmaps from <a href="https://www.fab.com/listings/11388bc3-c13a-4c2f-b7d0-578022969a60
-"> StampIT! Collection - FREE Examples by Rowlan </a> </p>
-
-<p> My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
+"> StampIT! Collection - FREE Examples by Rowlan </a>
+<br><br>
+ My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspired me to make sure that my snow was not limited to flat ground </p>
 
+<h4><br><br>Intro</h4>
+
+I created deformable snow in Unreal Engine using a compute shader that writes to a render target, which is then used as a dynamic heightmap. A custom manager tracks all objects interacting with the snow and passes their transformation matrices, along with deformation area bounds and maximum snow depth, to the shader.
+<br><br>
+To be able to achieve a high level of detail I modified Unreal’s own Parallax Occlusion Mapping function. In its default setup it uses one texture as input, so to avoid an extremely high resolution heightmap I added the ability to mix in detail height textures.
+<br><br>
+My goal with this project was to create a deformable snow that works on uneven terrain.
 
 
 
-
-<h4>Shader Setup</h4>
-<p> The shader setup was the same as it was in <a href="https://lillabofinken.github.io/0_Submarine.html#:~:text=Shader%20Setup"> my submarine project </a>. </p>
-
-Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to create several files, define the required classes and functions, and make sure everything is properly connected before I can even begin writing the shader.
-To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
-Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
-After that, I can start sending parameters to the shader and focus on writing the actual logic.
+<h4><br><br>Shader Setup</h4>
+<p> The shader setup was the same as it was in <a href="https://lillabofinken.github.io/0_Submarine.html#:~:text=Shader%20Setup"> my submarine project </a>. <br><br> </p>
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
@@ -263,4 +264,26 @@ After that, I can start sending parameters to the shader and focus on writing th
   </div>
 </div>
 <br><br><br><br>
+
 <img src="{% link assets/images/Snow/SnowPhilip.png %}" alt="Image 1" style="width: 100%"/>
+
+
+<div>
+<h4>Things I would like to do if I had more time</h4>
+
+<b>Capsule shape support</b><br>
+Deformation is currently only done with spheres, which can cause visible stepping artifacts when objects move too quickly. Replacing these with capsules that go between its previous and current positions would smooth out these artifacts.
+<br><br>
+
+<b>Box shape support</b><br>
+Adding support for box collision would allow for box shaped objects to interact with the snow
+<br><br>
+
+<b>Movable deformation area</b><br>
+Adding support for moving the deformation area with the player.
+<br><br>
+
+<b>Rotate snow collision plane</b><br>
+The line trace that gets the object's distance from the ground, I would like to use the hit normal from it to rotate the snow collision plane towards the hit normal. This would make the snow collisions more accurate in most cases
+
+</div>

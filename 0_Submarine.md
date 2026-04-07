@@ -337,10 +337,14 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 <div>
 <h4>Things I would like to do if I had more time</h4>
+<b>Panini Projection</b><br>
 Add panini projection to the imaging sonar slices to reduce the perspective distortion at higher FOVs to allow for a higher spin speed and image quality.
-
 <br><br>
+
+<b>Drawing on the map</b><br>
 Ability to draw on the map because it would be nice to be able to mark points of interest on the map so you don’t accidentally go to the same spot multiple times.
 <br><br>
+
+<b>Looking up with imaging sonar</b><br>
 Adding player control over the imaging sonar angle to look down, forwards or up to allow the player to see things above the submarine as well as below which would allow for more interesting level design with things like caves. I would need to update how the colors are decided to make both ceilings and floors readable.
 </div>
