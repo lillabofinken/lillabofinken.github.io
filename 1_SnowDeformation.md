@@ -29,22 +29,17 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h2> Decision to use POM </h2>
-    When I first started the project I was debating on if I was going to use Nantie or Parallax Occlusion Mapping (POM). I had a stretch goal of adding a POM/Nanite toggle. 
-    <br><br>
-    I first tried to use Nanite but I had issues working with Nanite’s displacement direction. 
-    <br><br>
-    I was 50/50 on if I was going to use nanite or Parallax Occlusion Mapping (POM). 
-    <br><br>
-    Originally I wanted to use POM but decided on nanite because of some experiments I did, adding snow on objects using Nanite displacement by adding a bevel on meshes. The decision to use Nanite was also because it’s easier to work with. 
-    <br><br>
-    I had a stretch goal of adding a POM/Nanite toggle.
-    <br><br>
-    When working I had an issue with Nanite’s displacement direction, because it’s based on the vertex normal which works fine for flat ground but looks bad on slopes.
-    <br><br>
-    I tried to force all vertex normals to point up while saving the real vertex normals as vertex color and fixing it in the material. But I wanted to use landscapes and from what I found it would need to modify the engine to change how landscape normals are done which would take too much time away from the snow.
-    <br><br>
-    In the end I decided to go back to POM as was originally planned.
+    <h2> Decision to use Parallax Occlusion Mapping over Nanite </h2>
+    At the start of the project, I wasn’t sure if I wanted to use Nanite displacement or Parallax Occlusion Mapping (POM).
+  <br><br>
+  POM felt like the more interesting option. It gets overshadowed by Nanite/Tessellation, but God of War (2018) and The Last of Us Part II use parallax techniques for their snow very effectively, which got me interested in using POM for this project. It also seemed like it would be more interesting to work with, since Nanite deformation is basically just driving a single float.
+  <br><br>
+  Nanite was also appealing because it is straightforward and works well for adding snow buildup on objects. I did early experiments using Nanite displacement and bevels, and the results looked promising. The main issue was that the displacement does not follow the vertical axis as it follows the vertex normal. I tried forcing normals upward and storing the originals as vertex colors, but this approach would not work on landscapes without either modifying engine code or using the landscape as a static mesh.
+  <br><br>
+  With POM, the deformation direction issue was much less noticeable and modifications to POM would not require a custom engine build which caused me to make the final decision of focusing on POM.
+  <br><br>
+  I did end up adding support for nanite too and I found out that once the project was finished and the pileup and detail textures were applied to the deformation, the displacement direction issue ended up being a lot less noticeable.
+
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
@@ -52,7 +47,6 @@ After that, I can start sending parameters to the shader and focus on writing th
       <img src="{% link assets/images/Snow/NaniteTest_1.png %}" alt="Image 1" style="width: 100%"/>
       <b>Test with multiple bevels</b>
       <img src="{% link assets/images/Snow/NaniteTest_2.png %}" alt="Image 1" style="width: 100%"/>
-
     </span>
   </div>
 </div>
