@@ -96,8 +96,10 @@ After that, I can start sending parameters to the shader and focus on writing th
     I decided to bake this information into the matrices vertical positions. To achieve this the manager does linetraces downwards from the object and replaces the vertical position of the matrices with the hit distance.
     This means that the vertical position becomes local to the ground below.
     <br><br>
+    This isn’t perfect though, because it’s basically just raising or lowering a flat plane with the terrain. I planned to improve the collision by using the hit normal to rotate the plane but since the issue wasn't that noticeable I felt like my time could be better spent elsewhere.
+    <br><br>
 
-    The reason why I decided to send entire matrices is because I had ambitions of adding support for multiple shapes which in the end I did not have time to do. I currently only have support for spheres.
+    The reason why I decided to send entire matrices is because I wanted to add support for different shapes like capsules and boxes which in the end I did not have time to do. I currently only have support for spheres.
 
 
   </div>
