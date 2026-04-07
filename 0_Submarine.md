@@ -51,7 +51,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 <div class="row 50%" style="margin-top:0;">
 <h2>Imaging Sonar</h2>
-  <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%; display: block;" />
+  <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%; display: block; margin: 0 auto;" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4> Depth Panorama </h4>
