@@ -39,15 +39,18 @@ The project was originally inspired by the torpedo scene in hunt for red october
   </div>
 </div>
 
+<br><br>
+
+<div>
 <h2>Shader Setup</h2>
 Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to create several files, define the required classes and functions, and make sure everything is properly connected before I can even begin writing the shader.
 To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
 Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
 After that, I can start sending parameters to the shader and focus on writing the actual logic.
+</div>
 
-
-<h2>Imaging Sonar</h2><br>
 <div class="row 50%" style="margin-top:0;">
+<h2>Imaging Sonar</h2><br>
   <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
