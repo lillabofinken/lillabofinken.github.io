@@ -50,7 +50,9 @@ After that, I can start sending parameters to the shader and focus on writing th
 </div>
 
 <div class="row 50%" style="margin-top:0;">
+<div>
 <h2>Imaging Sonar</h2><br>
+</div>
   <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
