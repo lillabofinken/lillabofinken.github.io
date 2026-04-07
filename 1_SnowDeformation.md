@@ -22,6 +22,8 @@ For the landscape I used heightmaps from <a href="https://www.fab.com/listings/1
 
 
 <h4>Shader Setup</h4>
+<p> The shader setup was the same as it was in <br><a href=https://lillabofinken.github.io/0_Submarine.html#:~:text=Shader%20Setup> my supmarine project </a> </p>
+
 Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to create several files, define the required classes and functions, and make sure everything is properly connected before I can even begin writing the shader.
 To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
 Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
