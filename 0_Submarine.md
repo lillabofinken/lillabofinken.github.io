@@ -63,17 +63,25 @@ After that, I can start sending parameters to the shader and focus on writing th
     Instead, I captured the panorama incrementally by rotating a narrow-FOV Scene Capture 2D and stitching the slices together.
     <br><br>
     However, the default Scene Capture 2D does not support independent control over  horizontal and vertical FOV. To solve this, I implemented a custom Scene Capture 2D with a modified projection matrix, enabling full control over both axes.
+    <br><br>
+    The slice FOV needed to be narrow because higher FOVs introduce noticeable perspective warping toward the edges. This distortion creates visible seams between slices and at high FOVs, can make the final image difficult to read.
+    <br><br>
+    I found a horizontal FOV of 2 degrees to be a good balance between coverage and image quality.
+    <br><br>
+    I looked into using Panini projection to reduce distortion at higher FOVs, but I was already happy with the results so I chose to focus on the topographic map and passive sonar instead.
+<br><br><br><br>
 
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
+    <br><br>
       <img src="{% link assets/images/Sonar/SonarScan.gif %}" alt="Image 1" style="width: 70%"/>
       <img src="{% link assets/images/Sonar/Panorama.png %}" alt="Image 1" style="width: 70%"/>
 
     </span>
   </div>
 </div>
-<br><br><br><br>
+
 
 
 
@@ -180,7 +188,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h4>Color and final touches</h4>
+    <h4><br><br>Color and final touches</h4>
     The resulting image contains all the information we need, but it’s not very readable or visually clear. To make it easier to interpret, I put the green channel through a color ramp to create a red->green->blue gradient. Red indicates heights similar to the submarine and potential collision risks, while green and blue show safer distances. I then use the red channel to control the emissive strength, highlighting slopes and walls.
     <br><br>
     When the submarine isn't moving, sonar updates show very similar data, making it hard to see what’s being updated. To highlight the current update area, I add a rotating fade using the circular U coordinate to reduce emissive strength over distance. Pixels fade out over time and become bright again once the pixel is updated, giving visual feedback on the area of the map that's being updated.
@@ -191,7 +199,7 @@ After that, I can start sending parameters to the shader and focus on writing th
   <div class="6u$ 12u$(small)">
     <div class="row 50%" style="margin-top:0;">
       <div class="6u 12u$(small)">
-        <b>Green Channel</b> <br>
+        <b><br><br>Green Channel</b> <br>
         <b>Vertical Distance</b>
         <img src="{% link assets/images/Sonar/Green_Sorted_Disc.png %}" alt="Image 1" />
         <b>Color Ramp</b>
@@ -200,7 +208,7 @@ After that, I can start sending parameters to the shader and focus on writing th
         <img src="{% link assets/images/Sonar/ScanLine.png %}" alt="Image 1" />
       </div>
       <div class="6u$ 12u$(small)">
-        <b>Red Channel</b> <br>
+        <b><br><br>Red Channel</b> <br>
         <b>Accumulation Highlight</b>
         <img src="{% link assets/images/Sonar/Red_Sorted_Disc.png %}" alt="Image 1" />
         <b>Color Ramp * Red channel</b>
@@ -224,7 +232,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h4>Generating the map texture</h4>
+    <h4><br><br>Generating the map texture</h4>
     I generate a topographic map so the player can use it together with the imaging sonar to figure out their position relative to the terrain.
     <br><br>
     To do this, I take the landscape heightmap and process it in a compute shader. I also send in parameters for the contour line spacing, index line spacing, and the thickness of the lines.
@@ -244,7 +252,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
   </div>
   <div class="6u$ 12u$(small)">
-    <b>Map Texture</b><br>
+    <b><br><br>Map Texture</b><br>
     <img src="{% link assets/images/Sonar/MapTexture.png %}" alt="Image 1" style="width: 70%" />
     <br>
     <b>Map Texture 4 channels</b><br>
@@ -283,7 +291,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 <img src="{% link assets/images/Sonar/PasiveSonar.png %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h4>What is is passive sonar</h4>
+    <h4><br><br>What is is passive sonar</h4>
     The passive sonar is a waterfall graph that shows the direction towards certain objects in the world. The idea is that these objects would be points of interest or dangers like torpedoes.
     <br><br>
     On the graph the vertical axis is time, where new information is at the top and scrolls down with time.
@@ -297,7 +305,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
   
   <div class="6u$ 12u$(small)">
-    <b>Video demonstration</b>
+    <b><br><br>Video demonstration of passive sonar</b>
     <video autoplay muted loop controls style="width: 70%;">
       <source src="https://github.com/lillabofinken/lillabofinken.github.io/raw/main/assets/images/Sonar/PasiveSonar_Example_Short2X.mp4" type="video/mp4">
     </video>
@@ -312,7 +320,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <br><br>
     At that position, I add noise to the top row of the texture. The noise is strongest at the object’s angle and fades outward from that point. The spread depends on distance, so closer objects produce tighter and stronger signals.
     <br><br>
-    Each frame, the texture scrolls downward to create the waterfall effect. I also add a layer of ambient noise so the display remains active even when there are no strong signals present.
+    Each frame, the texture scrolls downward to create the waterfall effect. I also add a layer of ambient noise so the display remains active even when there are no strong signals present.<br><br><br><br>
 
 
 
@@ -325,4 +333,14 @@ After that, I can start sending parameters to the shader and focus on writing th
     
   </div>
 </div>
-<br><br><br><br>
+
+
+<div>
+<h4>Things I would like to do if I had more time</h4>
+Add panini projection to the imaging sonar slices to reduce the perspective distortion at higher FOVs to allow for a higher spin speed and image quality.
+
+<br><br>
+Ability to draw on the map because it would be nice to be able to mark points of interest on the map so you don’t accidentally go to the same spot multiple times.
+<br><br>
+Adding player control over the imaging sonar angle to look down, forwards or up to allow the player to see things above the submarine as well as below which would allow for more interesting level design with things like caves. I would need to update how the colors are decided to make both ceilings and floors readable.
+</div>
