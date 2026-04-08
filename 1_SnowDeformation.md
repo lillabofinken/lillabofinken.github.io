@@ -2,7 +2,7 @@
 layout: post
 title: Snow Deformation
 description:
-image: assets/images/Snow/HeaderShot.png
+image: assets/images/Snow/MainMenu.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
@@ -229,7 +229,7 @@ My goal with this project was to create a deformable snow that works on uneven t
     <span class="image fit">
       <b>Detail for height and color<br>
       Pileup now share the 0-1 range with the heightmap</b>
-      <img src="{% link assets/images/Snow/Video/PomToPileup.gif %}" alt="Image 1" style="width: 100%"/>
+      <img src="{% link assets/images/Snow/Video/Pom-Pileup.gif %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>
 </div>
