@@ -31,6 +31,7 @@ My goal with this project was to create a deformable snow that works on uneven t
   <div class="6u$ 12u$(small)">
     <span class="image fit">
       <br><br><img src="{% link assets/images/Snow/Video/SnowWalk.gif %}" alt="Image 1" style="width: 100%"/>
+      Glitter<br><img src="{% link assets/images/Snow/Video/Glitter.gif %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>
 </div>
