@@ -104,5 +104,5 @@ nav-menu: true
     </span>
   </div>
 </div>
-<br><br><br><br>
+<br><br><br><img src="{% link assets/images/Bean/Credits.png %}" alt="Image 1" style="width: 100%"/>
 
