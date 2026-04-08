@@ -25,7 +25,8 @@ I created deformable snow in Unreal Engine using a compute shader that writes to
 <br><br>
 To be able to achieve a high level of detail I modified Unreal’s own Parallax Occlusion Mapping function. In its default setup it uses one texture as input, so to avoid an extremely high resolution heightmap I added the ability to mix in detail height textures.
 <br><br>
-I used colored vector noise for the glitter which I normalize and use as a direction. I compare the direction from pixel to camera with the noise direction, the closer the angle the higher the emission.
+The glitter in snow is caused by a lot of tiny, shiny surfaces in the snow that reflect light in different directions.
+To simulate this I use noise as a direction and compare it with the direction from pixel to camera, the closer the angle the higher the emission.
 <br><br>
 My goal with this project was to create a deformable snow that works on uneven terrain.
 
