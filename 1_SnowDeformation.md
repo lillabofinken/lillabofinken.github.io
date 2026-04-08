@@ -17,13 +17,24 @@ For the landscape I used heightmaps from <a href="https://www.fab.com/listings/1
  My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspired me to make sure that my snow was not limited to flat ground </p>
 
-<h4><br><br>Intro</h4>
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4>Intro</h4>
 
 I created deformable snow in Unreal Engine using a compute shader that writes to a render target, which is then used as a dynamic heightmap. A custom manager tracks all objects interacting with the snow and passes their transformation matrices, along with deformation area bounds and maximum snow depth, to the shader.
 <br><br>
 To be able to achieve a high level of detail I modified Unreal’s own Parallax Occlusion Mapping function. In its default setup it uses one texture as input, so to avoid an extremely high resolution heightmap I added the ability to mix in detail height textures.
 <br><br>
 My goal with this project was to create a deformable snow that works on uneven terrain.
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <br><br><img src="{% link assets/images/Snow/Video/SnowWalk.gif %}" alt="Image 1" style="width: 100%"/>
+    </span>
+  </div>
+</div>
+
 
 
 
@@ -32,7 +43,7 @@ My goal with this project was to create a deformable snow that works on uneven t
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h2> Decision to use Parallax Occlusion Mapping over Nanite </h2>
+    <h4> Decision to use Parallax Occlusion Mapping over Nanite </h4>
     At the start of the project, I wasn’t sure if I wanted to use Nanite displacement or Parallax Occlusion Mapping (POM).
   <br><br>
   POM felt like the more interesting option. It gets overshadowed by Nanite/Tessellation, but God of War (2018) and The Last of Us Part II use parallax techniques for their snow very effectively, which got me interested in using POM for this project. It also seemed like it would be more interesting to work with, since Nanite deformation is basically just driving a single float.
