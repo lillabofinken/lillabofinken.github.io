@@ -8,7 +8,8 @@ nav-menu: true
 ---
 
 <img src="{% link assets/images/Sonar/AllThree.png %}" alt="Image 1" />
-<p> I used Pipe models made by <a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.</p>
+<p> Pipe models made by <a href="https://www.artstation.com/kim_betsgren">Kim Betsgren </a>.
+<br> Rowboat model made by <a href="https://www.marinofannar.com/"> Marinó Fannar Bjarnason </a>.</p>
 
 
 
@@ -52,7 +53,7 @@ After that, I can start sending parameters to the shader and focus on writing th
 
 <h2 style="margin-bottom: 0;">Imaging Sonar</h2>
 <div class="row 50%" style="margin-top:0;">
-  <img src="{% link assets/images/Sonar/ActiveSonarFinal.png %}" alt="Image 1" style="width: 50%" />
+  <img src="{% link assets/images/Sonar/ActiveSonar.gif %}" alt="Image 1" style="width: 50%" />
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4><br>Depth Panorama </h4>
