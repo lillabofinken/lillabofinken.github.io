@@ -348,4 +348,10 @@ Ability to draw on the map because it would be nice to be able to mark points of
 
 <b>Looking up with imaging sonar</b><br>
 Adding player control over the imaging sonar angle to look down, forwards or up to allow the player to see things above the submarine as well as below which would allow for more interesting level design with things like caves. I would need to update how the colors are decided to make both ceilings and floors readable.
+<br><br>
+
+<b>Passive sonar scrolling in a material</b><br>
+I realized this while writing that I could've done the scrolling in a material meaning that I would only need to update one row of pixels in the compute shader.
+
+
 </div>
