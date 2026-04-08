@@ -2,36 +2,48 @@
 layout: post
 title: Snow Deformation
 description:
-image: assets/images/Snow/HeaderShot.png
+image: assets/images/Snow/MainMenu.png
 owner: assets/images/TGA.png
 nav-menu: true
 ---
 
 <img src="{% link assets/images/Snow/HeaderShot.png %}" alt="Image 1" style="width: 100%"/>
  
-<p> For the cabin and props I used <a href="https://www.fab.com/listings/508fe84a-4976-4cfe-9a40-c2b9533da601
+<p style="font-style: italic; font-size: 0.8em;"> For the cabin and props I used <a href="https://www.fab.com/listings/508fe84a-4976-4cfe-9a40-c2b9533da601
 "> Modular Rural Cabin by Maarten Hof </a> <br>
 For the landscape I used heightmaps from <a href="https://www.fab.com/listings/11388bc3-c13a-4c2f-b7d0-578022969a60
-"> StampIT! Collection - FREE Examples by Rowlan </a> </p>
-
-<p> My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
+"> StampIT! Collection - FREE Examples by Rowlan </a>
+<br><br>
+ My main insperations for using Parallax Occlution Mapping for snow deformation was The last of us part 2 and God of War 2018 <br><a href="https://media.gdcvault.com/gdc2023/Slides/Re-inventing+the+wheel+for+snow+rendering_Surricchio_Paolo.pdf
 ">Paolo Surricchio GDC talk about GoW Ragnarok's Snow Deformation </a> inspired me to make sure that my snow was not limited to flat ground </p>
-
-
-
-
-
-<h4>Shader Setup</h4>
-<p> The shader setup was the same as it was in <a href="https://lillabofinken.github.io/0_Submarine.html#:~:text=Shader%20Setup"> my submarine project </a>. </p>
-
-Setting up compute shaders in Unreal can be a bit tedious. Normally, I need to create several files, define the required classes and functions, and make sure everything is properly connected before I can even begin writing the shader.
-To save time on the setup, I use Shadeup. I start by creating an empty plugin and telling Shadeup to use it for the shaders. I then define the module and compute shader names, and choose a template that renders to a render target. Shadeup generates the necessary files with the correct structure and naming automatically.
-Since Shadeup is built for Unreal Engine 5.3 and I am working in 5.6, some manual adjustments are needed. The generated code includes small issues, such as missing semicolons and incomplete dependency links, so I go through and clean those up to make sure everything compiles.
-After that, I can start sending parameters to the shader and focus on writing the actual logic.
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h2> Decision to use Parallax Occlusion Mapping over Nanite </h2>
+    <h4>Intro</h4>
+
+I created deformable snow in Unreal Engine using a compute shader that writes to a render target, which is then used as a dynamic heightmap. A custom manager tracks all objects interacting with the snow and passes their transformation matrices, along with deformation area bounds and maximum snow depth, to the shader.
+<br><br>
+To be able to achieve a high level of detail I modified Unreal’s own Parallax Occlusion Mapping function. In its default setup it uses one texture as input, so to avoid an extremely high resolution heightmap I added the ability to mix in detail height textures.
+<br><br>
+My goal with this project was to create a deformable snow that works on uneven terrain.
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <span class="image fit">
+      <br><br><img src="{% link assets/images/Snow/Video/SnowWalk.gif %}" alt="Image 1" style="width: 100%"/>
+    </span>
+  </div>
+</div>
+
+
+
+
+<h4><br><br>Shader Setup</h4>
+<p> The shader setup was the same as it was in <a href="https://lillabofinken.github.io/0_Submarine.html#:~:text=Shader%20Setup"> my submarine project </a>. <br><br> </p>
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+    <h4> Decision to use Parallax Occlusion Mapping over Nanite </h4>
     At the start of the project, I wasn’t sure if I wanted to use Nanite displacement or Parallax Occlusion Mapping (POM).
   <br><br>
   POM felt like the more interesting option. It gets overshadowed by Nanite/Tessellation, but God of War (2018) and The Last of Us Part II use parallax techniques for their snow very effectively, which got me interested in using POM for this project. It also seemed like it would be more interesting to work with, since Nanite deformation is basically just driving a single float.
@@ -41,6 +53,8 @@ After that, I can start sending parameters to the shader and focus on writing th
   With POM, the deformation direction issue was much less noticeable and modifications to POM would not require a custom engine build which caused me to make the final decision of focusing on POM.
   <br><br>
   I did end up adding support for nanite too and I found out that once the project was finished and the pileup and detail textures were applied to the deformation, the displacement direction issue ended up being a lot less noticeable.
+  <br><br>
+  Special thanks to <a href="https://www.marinofannar.com"> Marinó Fannar Bjarnason </a> for using Houdini to create the meshes I used in the vertex normal experiments.
 
   </div>
   <div class="6u$ 12u$(small)">
@@ -226,7 +240,7 @@ After that, I can start sending parameters to the shader and focus on writing th
     <span class="image fit">
       <b>Detail for height and color<br>
       Pileup now share the 0-1 range with the heightmap</b>
-      <img src="{% link assets/images/Snow/Video/PomToPileup.gif %}" alt="Image 1" style="width: 100%"/>
+      <img src="{% link assets/images/Snow/Video/Pom-Pileup.gif %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>
 </div>
@@ -261,4 +275,26 @@ After that, I can start sending parameters to the shader and focus on writing th
   </div>
 </div>
 <br><br><br><br>
+
 <img src="{% link assets/images/Snow/SnowPhilip.png %}" alt="Image 1" style="width: 100%"/>
+
+
+<div>
+<h4>Things I would like to do if I had more time</h4>
+
+<b>Capsule shape support</b><br>
+Deformation is currently only done with spheres, which can cause visible stepping artifacts when objects move too quickly. Replacing these with capsules that go between its previous and current positions would smooth out these artifacts.
+<br><br>
+
+<b>Box shape support</b><br>
+Adding support for box collision would allow for box shaped objects to interact with the snow
+<br><br>
+
+<b>Movable deformation area</b><br>
+Adding support for moving the deformation area with the player.
+<br><br>
+
+<b>Rotate snow collision plane</b><br>
+The line trace that gets the object's distance from the ground, I would like to use the hit normal from it to rotate the snow collision plane towards the hit normal. This would make the snow collisions more accurate in most cases
+
+</div>
