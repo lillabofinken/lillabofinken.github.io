@@ -43,7 +43,7 @@ Text
   Objects between the camera and the player would sometimes block the view, especially in areas with a lot of props or vertical elements. Using camera collision to solve this wasn’t ideal, since the camera would constantly move in and out, which could feel disorienting.
   <br>
   <br>
-  The existing solution was a simple depth fade that faded out anything between the camera and the player. It worked, but it was hard to tune. If the fade distance was short it could feel abrupt and almost unintentional, and if it was longer it wouldn’t fully solve the problem, since objects could still obscure the player in certain situations. 
+  The existing solution used a simple depth-based dithering effect that gradually removed objects between the camera and the player. It worked by defining a fade range where objects would go from fully visible to fully dithered out. In practice, this was difficult to tune. A short fade range made the dithering feel abrupt and unintentional, while a longer fade range would either leave objects still blocking the view, or cause them to start dithering while they were still in front of the player in order to fade out in time.
 
   </div>
   <div class="4u$ 12u$(small)">
@@ -57,10 +57,10 @@ Text
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
   <br>
-  To get more control over this, I replaced the depth fade with a cone-shaped mask projected from the camera toward the player in a material function. This made it possible to control where the cutout happens, either closer to the camera or tighter around the player. 
+  To fix these issues, I replaced the depth fade with a cone-shaped mask between the camera and the player. I also added a depth mask to ensure only geometry between the camera and the player is affected, and noise to make the fade less uniform and more visually interesting. This gave more control over how much of the area around the player is cut out, and allowed a more aggressive fade without it feeling like camera clipping.
   <br>
   <br>
-  I also added a depth check so only geometry in front of the player is affected, and a height-based mask that keeps anything below knee height. This avoids cutting into the ground and leaves a small “stump” of the objects, which helps keep a sense of where things are in the environment.
+  One issue was that fully dithered objects could disappear completely, which meant the player could lose awareness of what was blocking their movement. In some cases, parts of the floor could also be cut out when they shouldn’t be. To address this, I added a height mask that keeps anything below knee height. This prevents the ground from being cut away and leaves a small stump of the objects, helping with readability of the environment while still keeping the player visible.
 
   </div>
   <div class="4u$ 12u$(small)">
