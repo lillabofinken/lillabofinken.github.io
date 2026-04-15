@@ -14,15 +14,20 @@ nav-menu: true
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4>Intro</h4>
+During my internship at Campground Interactive, I worked as a gameplay programmer on Steel Effigy, a 4 player online co-op hack and slash roguelike built in Unreal using the Gameplay Ability System.
+<br>
+<br>
+I worked on content creating, tracing improvements, and general multiplayer bug fixing across the project.
+Towards the end of the internship, I started taking on more tech art related work to help reduce the workload on the art team, and also because it was something I enjoyed.
+<br>
+<br>
+The portfolio contains the most fun and rewarding work I did at Campground Interactive.
 
-Temp 
-<br> <br> 
-Text
 
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
-      <br><br><img src="{% link assets/images/Snow/Video/SnowWalk.gif %}" alt="Image 1" style="width: 100%"/>
+      <br><br><img src="{% link assets/images/SteelEffigy/HeartEffigyLarge.png %}" alt="Image 1" style="width: 70%"/>
     </span>
   </div>
 </div>
