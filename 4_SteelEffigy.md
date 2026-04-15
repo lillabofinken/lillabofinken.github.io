@@ -13,7 +13,7 @@ nav-menu: true
 
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
-    <h4>Intro</h4>
+    <h2>Intro</h2>
 During my internship at Campground Interactive, I worked as a gameplay programmer on Steel Effigy, a 4 player online co-op hack and slash roguelike built in Unreal using the Gameplay Ability System.
 <br>
 <br>
@@ -140,5 +140,64 @@ I also updated the UI to use the same data. A Rank Power array defines which val
   <div class="6u$ 12u$(small)">
     <b>UI Usage</b>
     <img src="{% link assets/images/SteelEffigy/AugmentSetup.png %}" alt="Image 1" style="width: 100%"/>
+  </div>
+</div>
+<br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+<h2>Gun Tracing Improvements</h2>
+
+<br>  
+The original weapon tracing worked by doing a ground trace based on the camera direction. If this hit the ground, a second trace would be fired forward from the player to compensate for the typical camera angle, which is usually tilted down around 15–30 degrees. This worked well on flat terrain, but became inconsistent when dealing with elevation changes or ramps.
+<br><br>
+The issue was that small height differences could cause the trace to hit the wall or steps leading up to the elevated surface instead of the target itself. From the player’s perspective, the shot should pass over these and reach the top surface, but the trace would often stop short.
+<br>
+<br>
+  </div>
+  <div class="6u$ 12u$(small)">
+    <b>Forward Trace</b>
+    <img src="{% link assets/images/SteelEffigy/Forward.png %}" alt="Image 1" style="width: 100%"/>
+  </div>
+</div>
+
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+
+<br>  
+To address small elevation changes, I added logic where if the forward trace hits something close enough to the player, a third elevation trace is fired slightly higher up. This allows the shot to pass over minor obstacles and better match the player’s intention of hitting elevated targets.
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <b>Elevation Trace</b>
+    <img src="{% link assets/images/SteelEffigy/Elevation.png %}" alt="Image 1" style="width: 100%"/>
+  </div>
+</div>
+
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
+
+<br>  
+For ramps, the player's intention is usually to shoot up along the slope. However, the current tracing would only reach a short distance up the ramp, and fail on taller ramps where the shot feels like it should continue further.
+<br><br>
+To solve this, I check if the forward and elevation traces hit surfaces with similar hit normals, and if they do, I treat it as a ramp and continue the trace along the surface instead of stopping.
+
+
+
+
+  </div>
+  <div class="6u$ 12u$(small)">
+    <b>Ramp Trace</b>
+    <img src="{% link assets/images/SteelEffigy/Ramp.png %}" alt="Image 1" style="width: 100%"/>
   </div>
 </div>
