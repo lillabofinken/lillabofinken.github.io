@@ -62,10 +62,10 @@ The portfolio contains the most fun and rewarding work I did at Campground Inter
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
   <br>
-  To fix these issues, I replaced the depth fade with a cone-shaped mask between the camera and the player. I also added a depth mask to ensure only geometry between the camera and the player is affected, and noise to make the fade less uniform and more visually interesting. This gave more control over how much of the area around the player is cut out, and allowed a more aggressive fade without it feeling like camera clipping.
+  To fix these issues, I replaced the depth fade with a cone-shaped mask between the camera and the player. I added a depth mask so only geometry between the camera and the player is affected, along with noise to make the fade less uniform and more visually interesting. This gave more control over how much of the area around the player is cut out, and allowed a more aggressive fade without it feeling like camera clipping.
   <br>
   <br>
-  One issue was that fully dithered objects could disappear completely, which meant the player could lose awareness of what was blocking their movement. In some cases, parts of the floor could also be cut out when they shouldn’t be. To address this, I added a height mask that keeps anything below knee height. This prevents the ground from being cut away and leaves a small stump of the objects, helping with readability of the environment while still keeping the player visible.
+  One issue was that fully dithered objects could disappear completely, which meant the player could lose awareness of what was blocking their movement. In some cases, parts of the floor could also be cut out when it shouldn’t be. To address this, I added a height mask that keeps anything below knee height. This prevents the ground from being cut away and leaves a small stump of the objects, helping with readability of the environment while still keeping the player visible.
 
   </div>
   <div class="4u$ 12u$(small)">
@@ -86,7 +86,7 @@ The portfolio contains the most fun and rewarding work I did at Campground Inter
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
 
-I was tasked with buffing all sword upgrades, which ended up being time consuming due to the current setup. Upgrade values and logic were hardcoded across multiple files, and updating them also required manually changing UI text. Even after going through everything, it was easy to miss parts.
+I was tasked with buffing all sword upgrades, which ended up being time consuming due to the current setup. Upgrade values and logic were hardcoded across multiple files, and the UI text had to be updated manually as well. Even after going through everything, it was easy to miss parts.
 <br><br>
 
 </div>
@@ -96,7 +96,7 @@ I was tasked with buffing all sword upgrades, which ended up being time consumin
   <div class="6u 12u$(small)">
 
 <br>  
-To address this, I moved all upgrade values into curve tables, one per weapon, where each upgrade level and its values were stored in a single place. This made it much easier to update and balance without having to track down scattered logic.
+To address this, I moved all upgrade values into curve tables, one per weapon, where each upgrade effect and its values were stored in a single place. This made it much easier to update and balance without having to track down scattered logic.
 <br><br>
 
 
@@ -160,7 +160,7 @@ I also updated the UI to use the same data. A Rank Power array defines which val
   <div class="6u 12u$(small)">
 
 <br>  
-The original weapon tracing worked by doing a ground trace based on the camera direction. If this hit the ground, a second trace would be fired forward from the player to compensate for the typical camera angle, which is usually tilted down around 15–30 degrees. This worked well on flat terrain, but became inconsistent when dealing with elevation changes or ramps.
+The original weapon tracing worked by doing a ground trace based on the camera direction. If this hits the ground, a second trace would be fired forward from the player to compensate for the typical camera angle, which is usually tilted down around 15–30 degrees. This worked well on flat terrain, but became inconsistent when dealing with elevation changes or ramps.
 <br><br>
 The issue was that small height differences could cause the trace to hit the wall or steps leading up to the elevated surface instead of the target itself. From the player’s perspective, the shot should pass over these and reach the top surface, but the trace would often stop short.
 <br>
