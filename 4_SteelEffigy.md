@@ -152,10 +152,12 @@ I also updated the UI to use the same data. A Rank Power array defines which val
 
 
 
-
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
 <h2>Gun Tracing Improvements</h2>
+</div>
+<div class="row 50%" style="margin-top:0;">
+  <div class="6u 12u$(small)">
 
 <br>  
 The original weapon tracing worked by doing a ground trace based on the camera direction. If this hit the ground, a second trace would be fired forward from the player to compensate for the typical camera angle, which is usually tilted down around 15–30 degrees. This worked well on flat terrain, but became inconsistent when dealing with elevation changes or ramps.
