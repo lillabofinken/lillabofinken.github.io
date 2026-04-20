@@ -41,17 +41,22 @@ nav-menu: true
 <div class="row 50%" style="margin-top:0;">
   <div class="6u 12u$(small)">
     <h4>Blender Exporter</h4>
-    Because we use unreal as a level editor we need our models to be saved in both the bean ( our engine ) project and the Unreal project. 
-	<br><br>
-	To make the export process easier for the artists I made an exporter that would export them to both the unreal and bean asset folder. 
+    Because we use Unreal as a level editor, our assets need to exist in both the Unreal project and  the Bean ( our engine ) project.
+<br><br> 
+To simplify this, I built an exporter that sends assets to both the Unreal and Bean asset folders at the same time. 
+<br><br> 
+Since Perforce sets tracked files as read-only until they’re checked out, we previously had to manually locate both the Bean and Unreal files in Perforce and check them out before exporting, which was tedious. 
+<br><br> 
+To avoid this I added perforce integration to the plugin using p4 commands. I added the ability to checkout files or make them writable through the blender plugin. It also will display the file status like if the file is unlocked, writable or checked out by you or someone else. 
+<br><br> 
+This allowed us to work in blender without touching the Perforce application until it was time to push our changes.
 
-	<br><br> 
-	Sometimes people forget to change settings or add prefixes which ends with time being spent on investigating issues caused by a bad export.  To lessen the risk of bad exports I added a function that would check if a prefix was missing before exporting and if it was the prefix would be added automatically. The exporter also applied all the settings we needed automatically before exporting.
 
 
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
+    <br><br> 
 		<b>The export window</b><br>
     	<img src="{% link assets/images/Bean/beanExport.png %}" alt="Image 1" style="width: 80%"/>
 
@@ -64,8 +69,7 @@ nav-menu: true
 
 <div class="row 50%" style="margin-top:0;">
   <div class="7u 12u$(small)">
-    <h4> Depth Panorama </h4>
-    Two Planar
+    <h4> Two Planar </h4>
 	To make the level designers work easier I made a 2 planar uv function. Why not triplanar? Because we wanted to use 45° walls and tri planar causes stretching on anything not perfectly aligned with the world axis. 
 	<br><br>
 	The ground was done by using the two horizontal world coordinates ( X & Z ).
