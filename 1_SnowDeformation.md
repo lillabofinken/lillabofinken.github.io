@@ -217,7 +217,7 @@ My goal with this project was to create a deformable snow that works on uneven t
   </div>
   <div class="6u$ 12u$(small)">
     <span class="image fit">
-      <b>Parallax Occlusion Mapping with pixel depth offse</b>
+      <b>Parallax Occlusion Mapping with pixel depth offset</b>
       <img src="{% link assets/images/Snow/Video/POM.gif %}" alt="Image 1" style="width: 100%"/>
     </span>
   </div>
